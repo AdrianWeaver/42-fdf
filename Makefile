@@ -1,45 +1,55 @@
-NAME 		=	./a.out
+NAME 			=	./a.out
 
-CC		=	gcc
+CC				=	gcc
 
-CFLAGS		=	-g3
+CFLAGS			=	-MMD -g3 -Wall -Wextra -Werror
 
-LIBS		=	-lXext -lX11
+SRCS_PATH		=	./sources/
 
-LIBFT		=	./libft/libft.a -I ./libft/includes
+OBJS_PATH		=	./objs/
 
-LIBS_INC	=	-I $(MLX_PATH)\
-				-I ./libft/includes
+LIBS			=	-lXext -lX11
 
-MLX_PATH	=	./minilibx-linux/
+LIBFT			=	./libft/libft.a -I ./libft/includes
 
-MLX		=	$(addprefix $(MLX_PATH), libmlx_Linux.a)
+INC				=	-I $(MLX_PATH)\
+					-I ./includes/\
+					-I ./libft/includes
 
-SRCS		=	main.c
+MLX_PATH		=	./minilibx-linux/
 
-OBJS		=	$(SRCS:.c=.o)
+MLX				=	$(addprefix $(MLX_PATH), libmlx_Linux.a)
 
-all:			$(NAME)
+SRCS			=	ft_put_pixel_img.c		\
+					main.c
+					
 
-$(NAME):		$(OBJS) $(MLX)
-			$(CC) $(CFLAGS) $^ -o $@ $(MLX) $(LIBS) $(LIBS_INC) $(LIBFT)
+OBJS			=	$(addprefix $(OBJS_PATH),$(SRCS:.c=.o))
 
-$(OBJS):		$(SRCS)
-			$(CC) $(CFLAGS) -c $< -o $@ $(LIBS) $(LIBS_INC)
+DEPS			=	$(OBJS:.o=.d)
+
+all:				$(NAME)
+
+$(NAME):			$(OBJS) $(MLX)
+					$(CC) $(CFLAGS) $^ -o $@ $(MLX) $(LIBS) $(INC) $(LIBFT)
+
+$(OBJS_PATH)%.o:	$(SRCS_PATH)%.c
+					@mkdir -p $(OBJS_PATH)
+					$(CC) $(CFLAGS) -c $< -o $@ $(LIBS) $(INC)
 
 $(MLX):			
-			$(MAKE) -C $(MLX_PATH)
+					$(MAKE) -C $(MLX_PATH)
 
 clean:		
-			rm -f $(OBJS)
+					rm -rf $(OBJS_PATH)
 
-fclean:		clean
-			rm -f $(NAME)
+fclean:				clean
+					rm -f $(NAME)
 
-re:			fclean all
+re:					fclean all
 
-test:		re
-			./a.out
+test:				all
+					./a.out
 
-.PHONY:			re fclean all test
+.PHONY:				re fclean all test
 
