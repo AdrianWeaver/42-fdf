@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 15:57:22 by aweaver           #+#    #+#             */
-/*   Updated: 2022/02/16 11:44:32 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/02/16 12:51:32 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,23 @@ typedef struct s_fdf_img
 
 typedef struct s_fdf_map
 {
+	int toto;
+}				t_fdf_map;
 
 # endif
 
 # ifndef FT_PUT_PIXEL_IMG
 #  define FT_PUT_PIXEL_IMG
 
-void	ft_put_pixel_img(t_fdf_img *img, int x, int y, int color);
+void	ft_put_pixel_img(t_fdf_img *img, int x, int y, int colour);
 
 # endif
 
+# ifndef FT_FDF_OPEN_MAP
+#  define FT_FDF_OPEN_MAP
+
+int	ft_fdf_open_map(char *file);
+
+# endif
 
 #endif

@@ -10,7 +10,9 @@ OBJS_PATH		=	./objs/
 
 LIBS			=	-lXext -lX11
 
-LIBFT			=	./libft/libft.a -I ./libft/includes
+LIBFT			=	./libft/libft.a
+
+LIBFT_PATH		=	./libft/
 
 INC				=	-I $(MLX_PATH)\
 					-I ./includes/\
@@ -21,6 +23,7 @@ MLX_PATH		=	./minilibx-linux/
 MLX				=	$(addprefix $(MLX_PATH), libmlx_Linux.a)
 
 SRCS			=	ft_put_pixel_img.c		\
+					ft_fdf_parse.c			\
 					main.c
 					
 
@@ -30,7 +33,7 @@ DEPS			=	$(OBJS:.o=.d)
 
 all:				$(NAME)
 
-$(NAME):			$(OBJS) $(MLX)
+$(NAME):			$(OBJS) $(MLX) $(LIBFT)
 					$(CC) $(CFLAGS) $^ -o $@ $(MLX) $(LIBS) $(INC) $(LIBFT)
 
 $(OBJS_PATH)%.o:	$(SRCS_PATH)%.c
@@ -40,16 +43,24 @@ $(OBJS_PATH)%.o:	$(SRCS_PATH)%.c
 $(MLX):			
 					$(MAKE) -C $(MLX_PATH)
 
+$(LIBFT):			
+					$(MAKE) -C $(LIBFT_PATH)
+
 clean:		
 					rm -rf $(OBJS_PATH)
+					@$(MAKE) -C $(LIBFT_PATH) clean
 
 fclean:				clean
+					$(MAKE) -C $(LIBFT_PATH) fclean
 					rm -f $(NAME)
 
 re:					fclean all
 
 test:				all
 					./a.out
+
+valgrind:			re
+					valgrind --leak-check=full --show-leak-kinds=all -s ./a.out -D BUFFER_SIZE=100
 
 .PHONY:				re fclean all test
 
