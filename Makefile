@@ -2,11 +2,14 @@ NAME 		=	./a.out
 
 CC		=	gcc
 
-CFLAGS		=	
+CFLAGS		=	-g3
 
 LIBS		=	-lXext -lX11
 
-LIBS_INC	=	-I $(MLX_PATH)
+LIBFT		=	./libft/libft.a -I ./libft/includes
+
+LIBS_INC	=	-I $(MLX_PATH)\
+				-I ./libft/includes
 
 MLX_PATH	=	./minilibx-linux/
 
@@ -19,7 +22,7 @@ OBJS		=	$(SRCS:.c=.o)
 all:			$(NAME)
 
 $(NAME):		$(OBJS) $(MLX)
-			$(CC) $(CFLAGS) $^ -o $@ $(MLX) $(LIBS) $(LIBS_INC)
+			$(CC) $(CFLAGS) $^ -o $@ $(MLX) $(LIBS) $(LIBS_INC) $(LIBFT)
 
 $(OBJS):		$(SRCS)
 			$(CC) $(CFLAGS) -c $< -o $@ $(LIBS) $(LIBS_INC)
@@ -30,12 +33,12 @@ $(MLX):
 clean:		
 			rm -f $(OBJS)
 
-fclean:			clean
+fclean:		clean
 			rm -f $(NAME)
 
 re:			fclean all
 
-test:			re
+test:		re
 			./a.out
 
 .PHONY:			re fclean all test
