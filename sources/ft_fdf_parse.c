@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 11:42:46 by aweaver           #+#    #+#             */
-/*   Updated: 2022/02/16 22:26:49 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/02/16 22:30:32 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 //void	ft_init_fdf_map(t_fdf_map *map)
 //{
 //}
-	
+
 //t_fdf_map	*ft_fdf_parse(int fd)
 //{
 	//t_fdf_map	map;
@@ -38,12 +38,14 @@ int	ft_fdf_open_map(char *file)
 	str = get_next_line(fd);
 	ft_printf("%s\n", str);
 	free(str);
-	//do
-	//{
-		//str = get_next_line(fd);
-		//ft_printf("%s\n", str);
-		//free(str);
-	//} while (str);
+	while (1)
+	{
+		str = get_next_line(fd);
+		if (str == 0)
+			break ;
+		ft_printf("%s\n", str);
+		free(str);
+	}
 	get_next_line(GNL_FLUSH);
 	close(fd);
 	return (0);
