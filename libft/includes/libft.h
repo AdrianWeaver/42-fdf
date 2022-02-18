@@ -6,7 +6,7 @@
 /*   By: aweaver <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 11:10:46 by aweaver           #+#    #+#             */
-/*   Updated: 2022/02/16 11:05:08 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/02/18 19:04:35 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -234,6 +234,13 @@ char	*ft_strnstr(const char *big, const char *little, size_t len);
 #  define FT_ATOI_H
 
 int		ft_atoi(const char *nptr);
+
+# endif
+
+# ifndef FT_REALLOC
+#  define FT_REALLOC
+
+void	*ft_realloc(void *ptr, size_t old_size, size_t size);
 
 # endif
 
