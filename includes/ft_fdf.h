@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 15:57:22 by aweaver           #+#    #+#             */
-/*   Updated: 2022/02/17 09:22:09 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/02/18 19:01:45 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,18 @@
 typedef struct s_fdf_img
 {
 	void	*img_id;
-	void	*img_ptr;
+	void	*img_str;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
 }				t_fdf_img;
+
+typedef struct s_fdf_map
+{
+	size_t			*x_max;
+	size_t			y_max;
+	int			**z;
+}				t_fdf_map;
 
 typedef struct s_fdf_env
 {
@@ -41,12 +48,8 @@ typedef struct s_fdf_env
 	int			window_w;
 	int			window_h;
 	t_fdf_img	*img;
+	t_fdf_map	*map;
 }				t_fdf_env;
-
-typedef struct s_fdf_map
-{
-	int toto;
-}				t_fdf_map;
 
 # endif
 
@@ -60,7 +63,7 @@ void	ft_put_pixel_img(t_fdf_img *img, int x, int y, int colour);
 # ifndef FT_FDF_OPEN_MAP
 #  define FT_FDF_OPEN_MAP
 
-int	ft_fdf_open_map(char *file);
+int		ft_fdf_open_map(char *file, t_fdf_env *env);
 
 # endif
 
@@ -71,14 +74,19 @@ int	ft_fdf_open_map(char *file);
 #  define KEY_SPACE 0x20
 #  define KEY_PLUS 0xffab
 #  define KEY_MINUS	0xffad
-#  define KEY_w	0x77
-#  define KEY_a	0x61
-#  define KEY_s	0x73
-#  define KEY_d	0x64
+#  define KEY_W	0x77
+#  define KEY_A	0x61
+#  define KEY_S	0x73
+#  define KEY_D	0x64
 #  define KEY_LEFT 0xff51
 #  define KEY_UP 0xff52	
 #  define KEY_RIGHT 0xff53
 #  define KEY_DOWN 0xff54
+
+/* KEYHOOK FUNCTIONS */
+
+int		ft_check_keys(int keycode, t_fdf_env *env);
+int		ft_nuke_program(t_fdf_env *env);
 
 # endif
 #endif
