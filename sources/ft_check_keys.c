@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_put_pixel_img.c                                 :+:      :+:    :+:   */
+/*   ft_check_keys.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/16 10:26:23 by aweaver           #+#    #+#             */
-/*   Updated: 2022/02/18 08:25:28 by aweaver          ###   ########.fr       */
+/*   Created: 2022/02/18 08:11:34 by aweaver           #+#    #+#             */
+/*   Updated: 2022/02/18 08:34:10 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_fdf.h"
+#include "libftprintf.h"
 
-void	ft_put_pixel_img(t_fdf_img *img, int x, int y, int colour)
+int	ft_check_keys(int keycode, t_fdf_env *env)
 {
-	char	*dst_pixel;
-
-	dst_pixel = img->img_str
-		+ (y * img->line_length + x * (img->bits_per_pixel / 8));
-	*(unsigned int *)dst_pixel = colour;
+	ft_printf("reached ft_check\n");
+	if (keycode == KEY_ESC)
+	{
+		ft_nuke_program(env);
+	}
+	return (0);
 }
