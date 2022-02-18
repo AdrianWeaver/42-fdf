@@ -23,7 +23,9 @@ MLX_PATH		=	./minilibx-linux/
 MLX				=	$(addprefix $(MLX_PATH), libmlx_Linux.a)
 
 SRCS			=	ft_put_pixel_img.c		\
-					ft_fdf_parse.c			\
+					ft_parse_fdf.c			\
+					ft_check_keys.c			\
+					ft_key_functions.c		\
 					main.c
 					
 
@@ -56,6 +58,9 @@ fclean:				clean
 
 re:					fclean all
 
+retest:				re
+					./a.out
+
 test:				all
 					./a.out
 
@@ -63,4 +68,3 @@ valgrind:			re
 					valgrind --leak-check=full --show-leak-kinds=all -s ./a.out -D BUFFER_SIZE=100
 
 .PHONY:				re fclean all test
-
