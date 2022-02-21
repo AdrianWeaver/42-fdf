@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 11:42:46 by aweaver           #+#    #+#             */
-/*   Updated: 2022/02/21 16:03:16 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/02/21 18:28:07 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,13 @@ t_fdf_map	*ft_init_fdf_map(t_fdf_env *env)
 	map->y_max = 0;
 	return (map);
 }
+
+/* The purpose of this code is to keep an idea in place to try to 
+ * free the gnl on the go, when they are no longer needed.
+ * the following code is a prototype of what it should look like in a near future
+ * the line gnl = ft_getnext_gnl_and_free should obviously be added in the
+ * function ft_fdf_parse
+ * */
 
 //t_fdf_str	*ft_getnext_gnl_and_free(t_fdf_str *gnl)
 //{
@@ -76,7 +83,6 @@ void	ft_fdf_parse(t_fdf_str *gnl, t_fdf_map *map)
 		free(split_output);
 		current_line++;
 		gnl = gnl->next;
-		//gnl = ft_getnext_gnl_and_free(gnl);
 	}
 }
 
@@ -108,22 +114,14 @@ int	ft_fdf_open_map(char *file, t_fdf_env *env)
 	if (fd == -1)
 		return (-1);
 	map = ft_init_fdf_map(env);
-	gnl_start = NULL;
+	gnl = ft_fdf_lst_addback_new(get_next_line(fd), NULL);
+	gnl_start = gnl;
+	map->y_max++;
 	while (1)
 	{
-		if (gnl_start == NULL)
-		{
-			gnl = ft_fdf_lst_addback_new(get_next_line(fd), NULL);
-			gnl_start = gnl;
-		}
-		else
-		{
-			gnl = ft_fdf_lst_addback_new(get_next_line(fd), gnl);
-		}
+		gnl = ft_fdf_lst_addback_new(get_next_line(fd), gnl);
 		if (gnl->str == NULL)
-		{
 			break ;
-		}
 		map->y_max++;
 	}
 	get_next_line(GNL_FLUSH);
