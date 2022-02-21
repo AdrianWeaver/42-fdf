@@ -1,23 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_check_keys.c                                    :+:      :+:    :+:   */
+/*   ft_free_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/18 08:11:34 by aweaver           #+#    #+#             */
-/*   Updated: 2022/02/21 15:15:30 by aweaver          ###   ########.fr       */
+/*   Created: 2022/02/21 10:51:23 by aweaver           #+#    #+#             */
+/*   Updated: 2022/02/21 16:03:32 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_fdf.h"
 #include "libftprintf.h"
 
-int	ft_check_keys(int keycode, t_fdf_env *env)
+void	ft_free_map(t_fdf_env *env)
 {
-	if (keycode == KEY_ESC)
+	size_t	i;
+
+	i = 0;
+	while (i < env->map->y_max)
 	{
-		ft_nuke_program(env);
+		free(env->map->z[i]);
+		i++;
 	}
-	return (0);
+	free(env->map->z);
+	free(env->map->x_max);
+	free(env->map);
+}
+
+void	ft_free_str(t_fdf_str *gnl)
+{
+	t_fdf_str	*tmp;
+
+	while (gnl->str)
+	{
+		free(gnl->str);
+		tmp = gnl;
+		gnl = gnl->next;
+		free(tmp);
+	}
+	free(gnl);
 }

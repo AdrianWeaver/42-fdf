@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 15:57:22 by aweaver           #+#    #+#             */
-/*   Updated: 2022/02/18 19:01:45 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/02/21 14:41:08 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,12 @@ typedef struct s_fdf_env
 	t_fdf_map	*map;
 }				t_fdf_env;
 
+typedef struct s_fdf_str
+{
+	char				*str;
+	struct s_fdf_str	*next;
+}				t_fdf_str;
+
 # endif
 
 # ifndef FT_PUT_PIXEL_IMG
@@ -82,6 +88,9 @@ int		ft_fdf_open_map(char *file, t_fdf_env *env);
 #  define KEY_UP 0xff52	
 #  define KEY_RIGHT 0xff53
 #  define KEY_DOWN 0xff54
+
+void	ft_free_map(t_fdf_env *env);
+void	ft_free_str(t_fdf_str *gnl);
 
 /* KEYHOOK FUNCTIONS */
 

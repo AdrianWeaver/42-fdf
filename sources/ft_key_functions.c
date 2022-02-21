@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 08:02:00 by aweaver           #+#    #+#             */
-/*   Updated: 2022/02/18 16:18:39 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/02/21 15:09:34 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,11 @@
 
 int	ft_nuke_program(t_fdf_env *env)
 {
+	ft_free_map(env);
 	if (env->img)
 	{	
 		if (env->img->img_id)
 			mlx_destroy_image(env->mlx_id, env->img->img_id);
-		if (env->map->z)
-			free(env->map->z);
-		if (env->map->x_max)
-			free(env->map->x_max);
 	}
 	mlx_clear_window(env->mlx_id, env->mlx_window);
 	mlx_destroy_window(env->mlx_id, env->mlx_window);
