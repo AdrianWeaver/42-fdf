@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 07:16:23 by aweaver           #+#    #+#             */
-/*   Updated: 2022/02/22 08:11:40 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/02/22 15:42:16 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	ft_make_square(t_fdf_env *env, t_fdf_img *img)
 	int	x;
 	int	y;
 
-	env->img = img;
+	return ;
 	x = 50;
 	while (x < (env->window_w - 50))
 	{
@@ -36,7 +36,13 @@ static void	ft_make_square(t_fdf_env *env, t_fdf_img *img)
 	}
 }
 
-//env.img = &img;
+void	ft_init_img(t_fdf_env *env, t_fdf_img *img)
+{
+	img->img_id = mlx_new_image(env->mlx_id, env->window_w, env->window_h);
+	img->img_str = mlx_get_data_addr(img->img_id, &img->bits_per_pixel,
+			&img->line_length, &img->endian);
+	env->img = img;
+}
 
 int	main(void)
 {
@@ -52,13 +58,12 @@ int	main(void)
 		return (0);
 	}
 	env.mlx_window = mlx_new_window(env.mlx_id, env.window_w, env.window_h,
-			"My custom window");
+			"My freaking sexy FDF");
 	if (env.mlx_window == 0)
 		return (0);
-	img.img_id = mlx_new_image(env.mlx_id, env.window_w, env.window_h);
-	img.img_str = mlx_get_data_addr(img.img_id, &img.bits_per_pixel,
-			&img.line_length, &img.endian);
+	ft_init_img(&env, &img);
 	ft_fdf_open_map("test_maps/42.fdf", &env);
+	ft_draw_map(&env);
 	ft_make_square(&env, &img);
 	mlx_put_image_to_window(env.mlx_id, env.mlx_window, img.img_id, 0, 0);
 	mlx_hook(env.mlx_window, 3, 1L << 1, &ft_check_keys, &env);

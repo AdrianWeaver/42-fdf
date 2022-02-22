@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 15:57:22 by aweaver           #+#    #+#             */
-/*   Updated: 2022/02/22 11:46:11 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/02/22 14:46:58 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct s_fdf_projection
 #  define FT_PUT_PIXEL_IMG
 
 void	ft_put_pixel_img(t_fdf_img *img, int x, int y, int colour);
+void	ft_bresenham(t_fdf_env *env, int x1, int y1, int x2, int y2);
 
 # endif
 
@@ -78,6 +79,13 @@ void	ft_put_pixel_img(t_fdf_img *img, int x, int y, int colour);
 #  define FT_FDF_OPEN_MAP
 
 int		ft_fdf_open_map(char *file, t_fdf_env *env);
+
+# endif
+
+# ifndef FT_DRAW_MAP
+#  define FT_DRAW_MAP
+
+void	ft_draw_map(t_fdf_env *env);
 
 # endif
 
