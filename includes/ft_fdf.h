@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 15:57:22 by aweaver           #+#    #+#             */
-/*   Updated: 2022/02/21 14:41:08 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/02/22 08:17:34 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_fdf_map
 {
 	size_t			*x_max;
 	size_t			y_max;
-	int			**z;
+	int				**z;
 }				t_fdf_map;
 
 typedef struct s_fdf_env
