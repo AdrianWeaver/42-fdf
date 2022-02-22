@@ -8,7 +8,7 @@ SRCS_PATH		=	./sources/
 
 OBJS_PATH		=	./objs/
 
-LIBS			=	-lXext -lX11
+LIBS			=	-lXext -lX11 -lm
 
 LIBFT			=	./libft/libft.a
 
