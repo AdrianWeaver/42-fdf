@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 11:42:46 by aweaver           #+#    #+#             */
-/*   Updated: 2022/02/21 18:28:07 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/02/22 11:44:18 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 #include "libftprintf.h"
 #include "get_next_line.h"
 
-size_t	ft_array_size(char **str)
+int	ft_array_size(char **str)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
 	if (!str)
@@ -60,9 +60,9 @@ t_fdf_map	*ft_init_fdf_map(t_fdf_env *env)
 void	ft_fdf_parse(t_fdf_str *gnl, t_fdf_map *map)
 {
 	char	**split_output;
-	size_t	current_line;
-	size_t	current_line_size;
-	size_t	i;
+	int		current_line;
+	int		current_line_size;
+	int		i;
 
 	current_line = 0;
 	map->z = malloc(sizeof(int *) * map->y_max);

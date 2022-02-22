@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 10:51:23 by aweaver           #+#    #+#             */
-/*   Updated: 2022/02/21 16:03:32 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/02/22 11:45:38 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	ft_free_map(t_fdf_env *env)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
 	while (i < env->map->y_max)
