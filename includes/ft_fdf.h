@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 15:57:22 by aweaver           #+#    #+#             */
-/*   Updated: 2022/02/22 08:17:34 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/02/22 08:48:33 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,14 @@ typedef struct s_fdf_str
 	char				*str;
 	struct s_fdf_str	*next;
 }				t_fdf_str;
+
+typedef struct s_fdf_projection
+{
+	int	x1;
+	int	x2;
+	int	y1;
+	int	y2;
+}				t_fdf_projection;
 
 # endif
 
