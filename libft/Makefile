@@ -6,7 +6,7 @@
 #    By: aweaver <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/23 10:40:46 by aweaver           #+#    #+#              #
-#    Updated: 2022/02/18 13:01:32 by aweaver          ###   ########.fr        #
+#    Updated: 2022/02/23 08:10:32 by aweaver          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -110,6 +110,7 @@ DEP			=	$(OBJS:.o=.d)
 CFLAGS		=	-MMD -Wall -Wextra -Werror -g3
 
 all:		$(NAME)
+			@echo "\33[0;32mLIBFT COMPILED !\33[m"
 
 $(NAME):	$(OBJS)
 			ar -rcs $@ $^
@@ -132,3 +133,4 @@ re:			fclean all
 -include $(DEP)
 
 .PHONY:		all re clean fclean
+.SILENT:
