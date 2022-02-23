@@ -38,25 +38,30 @@ DEPS			=	$(OBJS:.o=.d)
 all:				$(NAME)
 
 $(NAME):			$(OBJS) $(MLX) $(LIBFT)
-					$(CC) $(CFLAGS) $^ -o $@ $(MLX) $(LIBS) $(INC) $(LIBFT)
+					@$(CC) $(CFLAGS) $^ -o $@ $(MLX) $(LIBS) $(INC) $(LIBFT)
+					@echo "\33[1;32mLinking done.\33[m"
 
 $(OBJS_PATH)%.o:	$(SRCS_PATH)%.c
 					@mkdir -p $(OBJS_PATH)
-					$(CC) $(CFLAGS) -c $< -o $@ $(LIBS) $(INC)
+					@$(CC) $(CFLAGS) -c $< -o $@ $(LIBS) $(INC)
+					@echo "\33[1;32mObj compiled \33[musing flag $(CFLAGS)"
 
 $(MLX):			
-					$(MAKE) -C $(MLX_PATH)
+					@$(MAKE) -C $(MLX_PATH)
+					@echo "\33[0;32m MLX COMPILED! \33[m"
 
 $(LIBFT):			
-					$(MAKE) -C $(LIBFT_PATH)
+					@$(MAKE) -C $(LIBFT_PATH)
 
 clean:		
-					rm -rf $(OBJS_PATH)
+					@rm -rf $(OBJS_PATH)
 					@$(MAKE) -C $(LIBFT_PATH) clean
+					@echo "\33[0;36mCleaned objects and dependencies. \33[m"
 
 fclean:				clean
-					$(MAKE) -C $(LIBFT_PATH) fclean
-					rm -f $(NAME)
+					@$(MAKE) -C $(LIBFT_PATH) fclean
+					@rm -f $(NAME)
+					@echo "\33[0;36mEverything is neat. \33[m"
 
 re:					fclean all
 
