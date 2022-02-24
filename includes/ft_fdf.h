@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 15:57:22 by aweaver           #+#    #+#             */
-/*   Updated: 2022/02/22 14:46:58 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/02/23 17:46:52 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,31 @@ typedef struct s_fdf_map
 	int			**z;
 }				t_fdf_map;
 
+typedef struct s_fdf_str
+{
+	char				*str;
+	struct s_fdf_str	*next;
+}				t_fdf_str;
+
+typedef struct s_fdf_line
+{
+	int		x1;
+	int		y1;
+	int		x2;
+	int		y2;
+	int		x3;
+	int		y3;
+}				t_fdf_line;
+
+typedef struct s_fdf_var
+{
+	int		mod_height;
+	int		spread;
+	int		start_x;
+	int		start_y;
+	double	angle;
+}				t_fdf_var;
+
 typedef struct s_fdf_env
 {
 	void		*mlx_id;
@@ -49,21 +74,8 @@ typedef struct s_fdf_env
 	int			window_h;
 	t_fdf_img	*img;
 	t_fdf_map	*map;
+	t_fdf_var	*var;
 }				t_fdf_env;
-
-typedef struct s_fdf_str
-{
-	char				*str;
-	struct s_fdf_str	*next;
-}				t_fdf_str;
-
-typedef struct s_fdf_projection
-{
-	int	x1;
-	int	x2;
-	int	y1;
-	int	y2;
-}				t_fdf_projection;
 
 # endif
 
@@ -71,7 +83,7 @@ typedef struct s_fdf_projection
 #  define FT_PUT_PIXEL_IMG
 
 void	ft_put_pixel_img(t_fdf_img *img, int x, int y, int colour);
-void	ft_bresenham(t_fdf_env *env, int x1, int y1, int x2, int y2);
+void	ft_bresenham(t_fdf_env *env, t_fdf_line line);
 
 # endif
 
@@ -86,6 +98,13 @@ int		ft_fdf_open_map(char *file, t_fdf_env *env);
 #  define FT_DRAW_MAP
 
 void	ft_draw_map(t_fdf_env *env);
+
+# endif
+
+# ifndef FT_GET_START
+#  define FT_GET_START
+
+void	ft_get_start(t_fdf_env *env);
 
 # endif
 

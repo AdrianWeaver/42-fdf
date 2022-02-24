@@ -28,6 +28,7 @@ SRCS			=	ft_put_pixel_img.c		\
 					ft_key_functions.c		\
 					ft_free_map.c			\
 					ft_bresenham.c			\
+					ft_draw.c				\
 					main.c
 					
 
