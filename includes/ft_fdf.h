@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 15:57:22 by aweaver           #+#    #+#             */
-/*   Updated: 2022/02/23 17:46:52 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/02/25 14:41:20 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,13 @@ typedef struct s_fdf_str
 	struct s_fdf_str	*next;
 }				t_fdf_str;
 
-typedef struct s_fdf_line
+typedef struct s_fdf_coords
 {
 	int		x1;
 	int		y1;
 	int		x2;
 	int		y2;
-	int		x3;
-	int		y3;
-}				t_fdf_line;
+}				t_fdf_coords;
 
 typedef struct s_fdf_var
 {
@@ -83,7 +81,7 @@ typedef struct s_fdf_env
 #  define FT_PUT_PIXEL_IMG
 
 void	ft_put_pixel_img(t_fdf_img *img, int x, int y, int colour);
-void	ft_bresenham(t_fdf_env *env, t_fdf_line line);
+void	ft_bresenham(t_fdf_env *env, t_fdf_coords line,	unsigned long int col);
 
 # endif
 
@@ -94,6 +92,8 @@ int		ft_fdf_open_map(char *file, t_fdf_env *env);
 
 # endif
 
+/* DRAWING FUNCTIONS */
+
 # ifndef FT_DRAW_MAP
 #  define FT_DRAW_MAP
 
@@ -101,10 +101,17 @@ void	ft_draw_map(t_fdf_env *env);
 
 # endif
 
+void	ft_draw_horizontal(t_fdf_env *env, t_fdf_coords current_point,
+			int i, int j);
+
 # ifndef FT_GET_START
 #  define FT_GET_START
 
-void	ft_get_start(t_fdf_env *env);
+/* FUNCTIONS TO DECIDE WHICH POINTS TO PRINT NEXT */
+
+void	ft_get_start(t_fdf_env *env, t_fdf_coords *coords);
+void	ft_get_new_line(t_fdf_env *env, t_fdf_coords *current, int i);
+void	ft_get_new_point(t_fdf_env *env, t_fdf_coords *current,	int i, int j);
 
 # endif
 
@@ -123,6 +130,8 @@ void	ft_get_start(t_fdf_env *env);
 #  define KEY_UP 0xff52	
 #  define KEY_RIGHT 0xff53
 #  define KEY_DOWN 0xff54
+
+/* FREE MEMORY FUNCTIONS */
 
 void	ft_free_map(t_fdf_env *env);
 void	ft_free_str(t_fdf_str *gnl);

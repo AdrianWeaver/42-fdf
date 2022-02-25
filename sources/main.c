@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 07:16:23 by aweaver           #+#    #+#             */
-/*   Updated: 2022/02/24 09:29:55 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/02/25 11:50:26 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	ft_init_var(t_fdf_env *env)
 	var = malloc(sizeof(*var) * 1);
 	var->mod_height = 5;
 	var->spread = 10;
+	var->angle = 0.52;
 	env->var = var;
 }
 
