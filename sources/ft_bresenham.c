@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 08:30:06 by aweaver           #+#    #+#             */
-/*   Updated: 2022/02/25 14:38:00 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/02/25 17:13:25 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,20 @@
 #include "libftprintf.h"
 #include <math.h>
 
-//int		ft_check_limits(t_fdf_env *env, t_fdf_projection *proj)
-//{
-	//if (proj->x1 > env->window_w || proj->x2 > env->window_w)
-		//return (0);
-	//if (proj->x1 < 0 || proj->x2 < 0)
-		//return (0);
-	//if (proj->x1 < 0 || proj->x2 < 0)
-		//return (0);
-	//if (proj->y1 > env->window_h || proj->y2 > env->window_h)
-		//return (0);
-	//else
-		//ft_bresenham(t_fdf_projection *proj);
+void	ft_secure_bresenham(t_fdf_env *env, t_fdf_coords line,
+		unsigned long int col)
+{
+	if (line.x1 > env->window_w || line.x2 > env->window_w)
+		return ;
+	if (line.x1 < 0 || line.x2 < 0)
+		return ;
+	if (line.x1 < 0 || line.x2 < 0)
+		return ;
+	if (line.y1 > env->window_h || line.y2 > env->window_h)
+		return ;
+	else
+		ft_bresenham(env, line, col);
+}
 
 void	ft_bresenham(t_fdf_env *env, t_fdf_coords line, unsigned long int col)
 {
@@ -66,7 +68,6 @@ void	ft_bresenham(t_fdf_env *env, t_fdf_coords line, unsigned long int col)
 	{
 		while (i <= Dx)
 		{
-			//ft_put_pixel_img(env->img, x1, y1, 0xffffff);
 			ft_put_pixel_img(env->img, x1, y1, col);
 			i++;
 			x1 += Xincr;
@@ -82,7 +83,6 @@ void	ft_bresenham(t_fdf_env *env, t_fdf_coords line, unsigned long int col)
 	{
 		while (i <= Dy)
 		{
-			//ft_put_pixel_img(env->img, x1, y1, 0xffffff);
 			ft_put_pixel_img(env->img, x1, y1, col);
 			i++;
 			y1 += Yincr;
@@ -99,148 +99,27 @@ void	ft_bresenham(t_fdf_env *env, t_fdf_coords line, unsigned long int col)
 void	ft_draw_map(t_fdf_env *env)
 {
 	t_fdf_coords	start;
+	t_fdf_coords	new_line;
 	t_fdf_coords	current;
 	int				i;
 	int				j;
 
 	i = 0;
 	ft_get_start(env, &start);
-	current = start;
+	new_line = start;
 	while (i < env->map->y_max)
 	{
 		j = 0;
-		ft_get_new_line(env, &current, i);
+		current = new_line;
+		current.y1 -= env->map->z[i][j];
 		while (j < env->map->x_max[i])
 		{
 			ft_draw_horizontal(env, current, i, j);
-			//draw_vertical if not last line
+			ft_draw_vertical(env, current, i, j);
+			j++;
 			ft_get_new_point(env, &current, i, j);
-			//go to next horizontal point
-			j++;
 		}
 		i++;
+		ft_get_new_line(env, &new_line, i);
 	}
 }
-	
-/*
-
-void	ft_draw_map(t_fdf_env *env)
-{
-	t_fdf_line	line_v;
-	t_fdf_line	line_h;
-	int			i;
-	int			j;
-	int			**z;
-
-	z = env->map->z;
-
-	i = 0;
-	env->var->angle = 0.52;
-	ft_get_start(env);
-	line_h.x1 = env->var->start_x; 
-	line_h.y1 = env->var->start_y;
-	line_v.x1 = line_h.x1;
-	line_v.y1 = env->var->start_y;
-	ft_printf("line_h.x1 = %d line_h.y1 = %d\n", line_h.x1, line_h.y1);
-	ft_printf("line_v.x1 = %d line_v.y1 = %d\n", line_v.x1, line_v.y1);
-	//while (i < env->map->y_max)
-	while (i < 2)
-	{
-		ft_printf("yes\n");
-		j = 0;
-		while (j < env->map->x_max[i])
-		{
-			line_v.x1 = line_h.x1;
-			line_v.x1 = line_h.y1;
-			line_h.x2= line_h.x1 + env->var->spread * cos(env->var->angle);
-			if (j == 0)
-			{
-				line_h.y2= line_h.y1 + env->var->spread
-					* sin(env->var->angle) - z[i][j];
-			}
-			else if (j != 0)
-			{
-				line_h.y2= line_h.y1 + env->var->spread
-					* sin(env->var->angle) - z[i][j] + z[i][j - 1];
-			}
-			line_v.x2 = line_v.x1 - env->var->spread * cos(env->var->angle);
-			if (i == 0)
-			{
-				line_v.y2 = line_v.y1 + env->var->spread * sin(env->var->angle)
-					- z[i + 1][j];
-			}
-			else if (i != 0)
-			{
-				line_v.y2 = line_v.y1 + env->var->spread * sin(env->var->angle)
-					- z[i + 1][j] + z[i][j];
-			}
-			if (i < env->map->y_max - 1)
-				ft_bresenham(env, line_h, 0xff0000);
-			if (j < env->map->x_max[i] - 1)
-				ft_bresenham(env, line_v, 0x00ff00);
-			line_h.x1 = line_h.x2;
-			line_h.y1 = line_h.y2;
-			j++;
-		}
-		line_h.x1 = env->var->start_x - (env->var->spread * i * cos(env->var->angle));
-		line_h.y1 = env->var->start_y + (env->var->spread * i * sin(env->var->angle));
-		i++;
-	}
-
-			return ;
-	while (i < env->map->y_max)
-	//while (i < 10)
-	{
-		j = 0;
-		while (j < env->map->x_max[i])
-		{
-	//printing horizontal
-			line_h.x2= line_h.x1 + env->var->spread * cos(env->var->angle);
-			line_h.y2= line_h.y1 + env->var->spread * sin(env->var->angle) - env->map->z[i][j];
-			line_v.x1 = line_h.x1;
-			line_v.y1 = line_h.y1;
-			if (j != 0)
-				line_h.y2 += env->map->z[i][j - 1];
-	//printing vertical
-			if (i < env->map->y_max - 1)
-			{
-				line_v.x2 = line_v.x1 - env->var->spread * cos(env->var->angle);
-				line_v.y2 = line_v.y1 + env->var->spread * sin(env->var->angle) - env->map->z[i + 1][j];
-				if (i != 0)
-					line_h.y2 += env->map->z[i][j];
-			}
-				if (j < env->map->x_max[i] - 1)
-					ft_bresenham(env, line_h, 0xff0000);
-				ft_bresenham(env, line_v, 0x00ff00);
-			line_h.x1 = line_h.x2;
-			line_h.y1 = line_h.y2;
-			line_v.x1 = line_h.x1;
-			line_v.y1 = line_h.y1;
-			j++;
-		}
-		line_h.x1 = env->var->start_x - (env->var->spread * i * cos(env->var->angle));
-		line_h.y1 = env->var->start_y + (env->var->spread * i * sin(env->var->angle)); 
-		i++;
-	}
-}
-
-//following code is the previous atempt at printing the whole map
-   //int	x;
-   //int	y;
-//
-   //y = 0;
-   //while (y < env->map->y_max - 1)
-   //{
-   //x = 0;
-   //while (x < env->map->x_max[y] - 1)
-   //{
-   //ft_bresenham(env, x, (y - env->map->z[y][x]), x + 1,
-   //((y + 1) - env->map->z[y + 1][x + 1]));
-   //x++;
-   //}
-   //y++;
-   //}
-   //ft_printf("nope");
-   //}
-   //
-*/

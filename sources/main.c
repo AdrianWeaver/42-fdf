@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 07:16:23 by aweaver           #+#    #+#             */
-/*   Updated: 2022/02/25 14:58:29 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/02/25 17:11:04 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	ft_make_square(t_fdf_env *env, t_fdf_img *img)
 void	ft_init_var(t_fdf_env *env, t_fdf_var *var)
 {
 	var->mod_height = 5;
-	var->spread = 10;
+	var->spread = 20;
 	var->angle = 0.52;
 	env->var = var;
 }
@@ -55,8 +55,8 @@ void	ft_init_img(t_fdf_env *env, t_fdf_img *img, t_fdf_var *var)
 
 void	t_fdf_init_env(t_fdf_env *env)
 {
-	env->window_w = 500;
-	env->window_h = 500;
+	env->window_w = 800;
+	env->window_h = 800;
 	env->mlx_id = mlx_init();
 	if (env->mlx_id == 0)
 	{
@@ -78,7 +78,7 @@ int	main(void)
 		return (0);
 	}
 	env.mlx_window = mlx_new_window(env.mlx_id, env.window_w, env.window_h,
-			"Don't judge me I'm an artist");
+			"My first ever NFT");
 	if (env.mlx_window == 0)
 		return (0);
 	ft_init_img(&env, &img, &var);

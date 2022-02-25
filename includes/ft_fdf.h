@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 15:57:22 by aweaver           #+#    #+#             */
-/*   Updated: 2022/02/25 14:41:20 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/02/25 17:12:41 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ typedef struct s_fdf_env
 
 void	ft_put_pixel_img(t_fdf_img *img, int x, int y, int colour);
 void	ft_bresenham(t_fdf_env *env, t_fdf_coords line,	unsigned long int col);
+void	ft_secure_bresenham(t_fdf_env *env, t_fdf_coords line,
+			unsigned long int col);
 
 # endif
 
@@ -102,6 +104,9 @@ void	ft_draw_map(t_fdf_env *env);
 # endif
 
 void	ft_draw_horizontal(t_fdf_env *env, t_fdf_coords current_point,
+			int i, int j);
+
+void	ft_draw_vertical(t_fdf_env *env, t_fdf_coords current_point,
 			int i, int j);
 
 # ifndef FT_GET_START
