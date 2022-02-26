@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 08:30:06 by aweaver           #+#    #+#             */
-/*   Updated: 2022/02/25 17:13:25 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/02/26 10:47:37 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,71 +29,66 @@ void	ft_secure_bresenham(t_fdf_env *env, t_fdf_coords line,
 		ft_bresenham(env, line, col);
 }
 
+void	ft_bresenham_higher(t_fdf_env *env, t_fdf_coords line,
+		t_fdf_bresham bresham, unsigned long int col)
+{
+	int	i;
+
+	i = 0;
+	while (i <= bresham.dx_start)
+	{
+		ft_put_pixel_img(env->img, line.x1, line.y1, col);
+		i++;
+		line.x1 += bresham.x_incr;
+		bresham.ex -= bresham.dy;
+		if (bresham.ex < 0)
+		{
+			line.y1 += bresham.y_incr;
+			bresham.ex += bresham.dx;
+		}
+	}
+}
+
+void	ft_bresenham_lower(t_fdf_env *env, t_fdf_coords line,
+		t_fdf_bresham bresham, unsigned long int col)
+{
+	int	i;
+
+	i = 0;
+	while (i <= bresham.dy_start)
+	{
+		ft_put_pixel_img(env->img, line.x1, line.y1, col);
+		i++;
+		line.y1 += bresham.y_incr;
+		bresham.ey -= bresham.dx;
+		if (bresham.ey < 0)
+		{
+			line.x1 += bresham.x_incr;
+			bresham.ey += bresham.dy;
+		}
+	}
+}
+
 void	ft_bresenham(t_fdf_env *env, t_fdf_coords line, unsigned long int col)
 {
-	int	ex;
-	int	ey;
-	int	dx;
-	int	dy;
-	int	Dx;
-	int	Dy;
-	int	Xincr;
-	int	Yincr;
-	int	i;
-	int	x1;
-	int	y1;
-	int	x2;
-	int	y2;
+	t_fdf_bresham	bresham;
 
-
-	x1 = line.x1; 
-	y1 = line.y1; 
-	x2 = line.x2; 
-	y2 = line.y2; 
-	i = 0;
-	Xincr = 1;
-	Yincr = 1;
-	ex = abs(x2 - x1);
-	ey = abs(y2 - y1);
-	dx = 2 * ex;
-	dy = 2 * ey;
-	Dx = ex;
-	Dy = ey;
-
-	if (x1 > x2)
-		Xincr = -1;
-	if (y1 > y2)
-		Yincr = -1;
-	if (Dx > Dy)
-	{
-		while (i <= Dx)
-		{
-			ft_put_pixel_img(env->img, x1, y1, col);
-			i++;
-			x1 += Xincr;
-			ex -= dy;
-			if (ex < 0)
-			{
-			y1 += Yincr;
-			ex += dx;
-			}
-		}
-	}
-	if (Dx <= Dy)
-	{
-		while (i <= Dy)
-		{
-			ft_put_pixel_img(env->img, x1, y1, col);
-			i++;
-			y1 += Yincr;
-			ey -= dx;
-			if (ey < 0)
-			{
-				x1 += Xincr;
-				ey += dy;
-			}
-		}
-	}
+	bresham.x_incr = 1;
+	bresham.y_incr = 1;
+	bresham.ex = abs(line.x2 - line.x1);
+	bresham.ey = abs(line.y2 - line.y1);
+	bresham.dx = 2 * bresham.ex;
+	bresham.dy = 2 * bresham.ey;
+	bresham.dx_start = bresham.ex;
+	bresham.dy_start = bresham.ey;
+	if (line.x1 > line.x2)
+		bresham.x_incr = -1;
+	if (line.y1 > line.y2)
+		bresham.y_incr = -1;
+	if (bresham.dx_start > bresham.dy_start)
+		ft_bresenham_higher(env, line, bresham, col);
+	if (bresham.dx_start <= bresham.dy_start)
+		ft_bresenham_lower(env, line, bresham, col);
 }
 
 void	ft_draw_map(t_fdf_env *env)

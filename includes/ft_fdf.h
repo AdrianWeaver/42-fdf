@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 15:57:22 by aweaver           #+#    #+#             */
-/*   Updated: 2022/02/25 17:12:41 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/02/26 10:34:17 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,17 @@ typedef struct s_fdf_env
 	t_fdf_var	*var;
 }				t_fdf_env;
 
+typedef struct s_fdf_bresham
+{
+	int	ex;
+	int	ey;
+	int	dx;
+	int	dy;
+	int	dx_start;
+	int	dy_start;
+	int	x_incr;
+	int	y_incr;
+}				t_fdf_bresham;
 # endif
 
 # ifndef FT_PUT_PIXEL_IMG
