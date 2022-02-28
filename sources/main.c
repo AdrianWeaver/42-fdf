@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 07:16:23 by aweaver           #+#    #+#             */
-/*   Updated: 2022/02/28 11:11:00 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/02/28 12:19:23 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int	main_2(char **argv)
 	mlx_put_image_to_window(env.mlx_id, env.mlx_window, img.img_id, 0, 0);
 	mlx_hook(env.mlx_window, 3, 1L << 1, &ft_check_keys, &env);
 	mlx_hook(env.mlx_window, 17, 0, &ft_nuke_program, &env);
+	mlx_hook(env.mlx_window, 25, 0, &ft_redraw, &env);
 	mlx_loop(env.mlx_id);
 	exit (0);
 }

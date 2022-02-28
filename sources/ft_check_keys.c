@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 08:11:34 by aweaver           #+#    #+#             */
-/*   Updated: 2022/02/28 11:45:37 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/02/28 12:42:02 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static void	ft_make_square(t_fdf_env *env, t_fdf_img *img)
 		x++;
 	}
 }
+
 void	ft_check_rotate(int keycode, t_fdf_env *env)
 {
 	if (keycode == KEY_A)

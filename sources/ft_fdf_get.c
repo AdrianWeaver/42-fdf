@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 07:52:36 by aweaver           #+#    #+#             */
-/*   Updated: 2022/02/28 11:20:49 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/02/28 12:41:45 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,6 @@ void	ft_get_start(t_fdf_env *env, t_fdf_coords *coords)
 	int		i;
 	int		mean_x;
 
-	//coords->x1 = 400;
-	//coords->y1 = 400;
-	//env->var->start_x = coords->x1;
-	//env->var->start_y = coords->y1;
-	//return ;
-	//adding a test
 	i = -1;
 	mean_x = 0;
 	if (env->map->y_max <= 1)
