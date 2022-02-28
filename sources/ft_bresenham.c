@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 08:30:06 by aweaver           #+#    #+#             */
-/*   Updated: 2022/02/28 10:40:45 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/02/28 10:42:54 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 void	ft_secure_bresenham(t_fdf_env *env, t_fdf_coords line,
 		unsigned long int col)
 {
-	ft_printf("line x1 = %d, line y1 = %d\n", line.x1, line.y1);
-	ft_printf("line x2 = %d, line y2 = %d\n", line.x2, line.y2);
 	if (line.x1 > env->window_w || line.x2 > env->window_w)
 		return ;
 	if (line.x1 < 0 || line.x2 < 0)
