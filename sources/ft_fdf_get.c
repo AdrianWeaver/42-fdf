@@ -6,12 +6,14 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 07:52:36 by aweaver           #+#    #+#             */
-/*   Updated: 2022/02/28 22:36:07 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/02/28 22:39:06 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include "ft_fdf.h"
+
+/* gets the highest point of the map, used for the gradient coloring funct */
 
 void	ft_get_z_max(t_fdf_env *env)
 {

@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 08:02:00 by aweaver           #+#    #+#             */
-/*   Updated: 2022/02/28 17:52:12 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/02/28 22:44:00 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ static void	ft_make_square(t_fdf_env *env, t_fdf_img *img)
 }
 */
 
+/* quits the program with clean frees for every malloced data */
+
 int	ft_nuke_program(t_fdf_env *env)
 {
 	ft_free_map(env);
@@ -51,6 +53,9 @@ int	ft_nuke_program(t_fdf_env *env)
 	return (0);
 }
 
+/* when the user is having way too much fun it's nice to have this function
+ * to reset to the original values, simply press R to use it			*/
+
 int	ft_reset(t_fdf_env *env)
 {
 	env->var->center_x = (env->window_w / 2);
@@ -61,6 +66,8 @@ int	ft_reset(t_fdf_env *env)
 	ft_redraw(env);
 	return (0);
 }
+
+/* force a new version of the map to be displayed */
 
 int	ft_redraw(t_fdf_env *env)
 {

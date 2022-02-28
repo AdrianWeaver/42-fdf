@@ -6,12 +6,14 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 10:51:23 by aweaver           #+#    #+#             */
-/*   Updated: 2022/02/28 13:12:44 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/02/28 22:41:23 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_fdf.h"
 #include "libftprintf.h"
+
+/* Morgan would be proud because man that's some neat free here (got it?) */
 
 void	ft_free_map(t_fdf_env *env)
 {
