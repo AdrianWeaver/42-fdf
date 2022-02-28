@@ -76,4 +76,6 @@ test:				all
 valgrind:			re
 					valgrind --leak-check=full --show-leak-kinds=all -s ./a.out test_maps/42.fdf
 
+-include $(DEPS)
+
 .PHONY:				re fclean all test
