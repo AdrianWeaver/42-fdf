@@ -6,7 +6,7 @@
 #    By: aweaver <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/23 10:40:46 by aweaver           #+#    #+#              #
-#    Updated: 2022/02/23 08:10:32 by aweaver          ###   ########.fr        #
+#    Updated: 2022/02/28 13:05:41 by aweaver          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,6 +80,7 @@ SRCS		=	$(addprefix $(LIBFT_PATH),\
 				ft_lstclear.c		\
 				ft_lstiter.c		\
 				ft_lstmap.c			\
+				ft_array_size.c		\
 				ft_count_digits.c)\
 				$(addprefix $(GNL_PATH),\
 				get_next_line.c)		\

@@ -6,7 +6,7 @@
 /*   By: aweaver <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 16:11:32 by aweaver           #+#    #+#             */
-/*   Updated: 2022/02/16 22:32:36 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/02/28 13:09:30 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void	*ft_getline(char *memory)
 char	*ft_make_magic(int fd, char buffer[BUFFER_SIZE + 1], int bytes_read)
 {
 	static char	*memory;
-	char		*dummy;
 
 	if (fd == GNL_FLUSH)
 	{
@@ -76,9 +75,7 @@ char	*ft_make_magic(int fd, char buffer[BUFFER_SIZE + 1], int bytes_read)
 			return (0);
 		}
 		buffer[bytes_read] = 0;
-		dummy = ft_strdup(buffer);
-		memory = ft_strjoin_free(memory, dummy);
-		free(dummy);
+		memory = ft_strjoin_free(memory, buffer);
 	}
 	return (ft_getline(memory));
 }
@@ -98,7 +95,7 @@ char	*get_next_line(int fd)
 	if (line && *line == 0)
 	{
 		free(line);
-		return(NULL);
+		return (NULL);
 	}
 	return (line);
 }
