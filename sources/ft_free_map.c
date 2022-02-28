@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 10:51:23 by aweaver           #+#    #+#             */
-/*   Updated: 2022/02/22 11:45:38 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/02/28 13:03:53 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,22 @@ void	ft_free_map(t_fdf_env *env)
 
 void	ft_free_str(t_fdf_str *gnl)
 {
-	t_fdf_str	*tmp;
-
-	while (gnl->str)
+	t_fdf_str *save;
+	while (gnl)
 	{
-		free(gnl->str);
-		tmp = gnl;
+		save = gnl;
 		gnl = gnl->next;
-		free(tmp);
+		free(save);
 	}
-	free(gnl);
+	return ;
+	//t_fdf_str	*tmp;
+
+	//while (gnl->str)
+	//{
+		//free(gnl->str);
+		//tmp = gnl;
+		//gnl = gnl->next;
+		//free(tmp);
+	//}
+	//free(gnl);
 }

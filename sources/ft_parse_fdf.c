@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 11:42:46 by aweaver           #+#    #+#             */
-/*   Updated: 2022/02/22 11:44:18 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/02/28 13:06:59 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,6 @@
 #include "libft.h"
 #include "libftprintf.h"
 #include "get_next_line.h"
-
-int	ft_array_size(char **str)
-{
-	int	i;
-
-	i = 0;
-	if (!str)
-		return (0);
-	while (str[i])
-	{
-		i++;
-	}
-	return (i);
-}
 
 t_fdf_map	*ft_init_fdf_map(t_fdf_env *env)
 {
@@ -41,21 +27,11 @@ t_fdf_map	*ft_init_fdf_map(t_fdf_env *env)
 	return (map);
 }
 
-/* The purpose of this code is to keep an idea in place to try to 
- * free the gnl on the go, when they are no longer needed.
- * the following code is a prototype of what it should look like in a near future
- * the line gnl = ft_getnext_gnl_and_free should obviously be added in the
- * function ft_fdf_parse
- * */
-
-//t_fdf_str	*ft_getnext_gnl_and_free(t_fdf_str *gnl)
-//{
-	//t_fdf_str	*next;
-//
-	//next = gnl->next;
-	//free(gnl);
-	//return (next);
-//}
+t_fdf_str	*ft_getnext_gnl_and_free(t_fdf_str *gnl)
+{
+	free(gnl->str);
+	return (gnl->next);
+}
 
 void	ft_fdf_parse(t_fdf_str *gnl, t_fdf_map *map)
 {
@@ -69,20 +45,19 @@ void	ft_fdf_parse(t_fdf_str *gnl, t_fdf_map *map)
 	map->x_max = malloc(sizeof(int *) * map->y_max);
 	while (gnl-> str != 0)
 	{
-		i = 0;
+		i = -1;
 		split_output = ft_split(gnl->str, ' ');
 		current_line_size = ft_array_size(split_output);
 		map->x_max[current_line] = current_line_size;
 		map->z[current_line] = malloc(sizeof(int *) * current_line_size);
-		while (i < current_line_size)
+		while (++i < current_line_size)
 		{
 			map->z[current_line][i] = ft_atoi(split_output[i]);
 			free(split_output[i]);
-			i++;
 		}
 		free(split_output);
 		current_line++;
-		gnl = gnl->next;
+		gnl = ft_getnext_gnl_and_free(gnl);
 	}
 }
 
