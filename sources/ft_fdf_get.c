@@ -6,12 +6,47 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 07:52:36 by aweaver           #+#    #+#             */
-/*   Updated: 2022/02/28 13:39:25 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/02/28 17:02:43 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include "ft_fdf.h"
+
+void	ft_get_z_max(t_fdf_env *env)
+{
+	int	i;
+	int	j;
+	int	ret;
+
+	ret = 0;
+	i = 0;
+	while (i < env->map->y_max)
+	{
+		j = 0;
+		while (j < env->map->x_max[i])
+		{
+			if (env->map->z[i][j] > ret)
+				ret = env->map->z[i][j];
+			j++;
+		}
+		i++;
+	}
+	if (ret > 255)
+		ret = 255;
+	env->map->z_max = ret;
+}
+
+void	ft_get_proportion(t_fdf_env *env)
+{
+	while ((sqrt((env->map->y_max * env->map->y_max)
+				+ (env->map->x_max[0] * env->map->x_max[0]))
+			* env->var->spread) > env->window_w)
+		env->var->spread--;
+	if (env->var->spread < 2)
+		env->var->spread = 2;
+	ft_get_z_max(env);
+}
 
 void	ft_get_start(t_fdf_env *env, t_fdf_coords *coords)
 {

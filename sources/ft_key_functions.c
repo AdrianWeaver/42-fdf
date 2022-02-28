@@ -6,13 +6,14 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 08:02:00 by aweaver           #+#    #+#             */
-/*   Updated: 2022/02/28 12:41:29 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/02/28 17:52:12 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_fdf.h"
 #include "libftprintf.h"
 
+/* following code is an example of a rectangle draw 
 static void	ft_make_square(t_fdf_env *env, t_fdf_img *img)
 {
 	int	x;
@@ -30,6 +31,7 @@ static void	ft_make_square(t_fdf_env *env, t_fdf_img *img)
 		x++;
 	}
 }
+*/
 
 int	ft_nuke_program(t_fdf_env *env)
 {
@@ -49,6 +51,17 @@ int	ft_nuke_program(t_fdf_env *env)
 	return (0);
 }
 
+int	ft_reset(t_fdf_env *env)
+{
+	env->var->center_x = (env->window_w / 2);
+	env->var->center_y = (env->window_h / 2);
+	env->var->angle = 0.5236;
+	env->var->mod_height = 1;
+	env->var->spread = 10;
+	ft_redraw(env);
+	return (0);
+}
+
 int	ft_redraw(t_fdf_env *env)
 {
 	void		*save;
@@ -61,5 +74,4 @@ int	ft_redraw(t_fdf_env *env)
 	mlx_destroy_image(env->mlx_id, save);
 	ft_printf("redo\n");
 	return (0);
-	ft_make_square(env, env->img);
 }

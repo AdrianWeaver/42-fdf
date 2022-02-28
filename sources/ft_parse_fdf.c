@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 11:42:46 by aweaver           #+#    #+#             */
-/*   Updated: 2022/02/28 13:06:59 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/02/28 16:31:41 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	ft_fdf_open_map(char *file, t_fdf_env *env)
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		return (-1);
+		exit (-1);
 	map = ft_init_fdf_map(env);
 	gnl = ft_fdf_lst_addback_new(get_next_line(fd), NULL);
 	gnl_start = gnl;
