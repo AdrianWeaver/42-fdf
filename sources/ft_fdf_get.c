@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 07:52:36 by aweaver           #+#    #+#             */
-/*   Updated: 2022/02/28 17:02:43 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/02/28 22:11:00 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	ft_get_new_point(t_fdf_env *env, t_fdf_coords *current,
 
 void	ft_get_new_line(t_fdf_env *env, t_fdf_coords *new_line, int i)
 {
-	if (i >= env->map->y_max)
+	if (i > env->map->y_max)
 		return ;
 	new_line->x1 -= env->var->spread * cos(env->var->angle);
 	new_line->y1 += env->var->spread * sin(env->var->angle);

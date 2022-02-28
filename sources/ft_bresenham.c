@@ -6,13 +6,16 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 08:30:06 by aweaver           #+#    #+#             */
-/*   Updated: 2022/02/28 19:23:18 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/02/28 22:25:17 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_fdf.h"
 #include "libftprintf.h"
 #include <math.h>
+
+/* securing the limits of the image so the program does not try to write
+ * out of the set boundaries											*/
 
 void	ft_secure_bresenham(t_fdf_env *env, t_fdf_coords line,
 		unsigned long int col, int z)
@@ -36,7 +39,7 @@ void	ft_bresenham_higher(t_fdf_env *env, t_fdf_coords line,
 	(void)col; //to be deleted
 
 	i = 0;
-	while (i <= bresham.dx_start)
+	while (i < bresham.dx_start)
 	{
 		//ft_put_pixel_img(env->img, line.x1, line.y1, col);
 		ft_put_pixel_img(env->img, line.x1, line.y1, ft_get_colour(env, z, i));
@@ -60,6 +63,7 @@ void	ft_bresenham_lower(t_fdf_env *env, t_fdf_coords line,
 	i = 0;
 	while (i <= bresham.dy_start)
 	{
+		//ft_put_pixel_img(env->img, line.x1, line.y1, col);
 		ft_put_pixel_img(env->img, line.x1, line.y1, ft_get_colour(env, z, i));
 		i++;
 		line.y1 += bresham.y_incr;
@@ -71,6 +75,9 @@ void	ft_bresenham_lower(t_fdf_env *env, t_fdf_coords line,
 		}
 	}
 }
+
+/* this function's purpose is to draw the most efficient approximation of 
+ * a straight line using pixels (int coords) instead of line equation (float) */
 
 void	ft_bresenham(t_fdf_env *env, t_fdf_coords line, unsigned long int col, int z)
 {

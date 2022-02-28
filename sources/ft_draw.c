@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 11:29:10 by aweaver           #+#    #+#             */
-/*   Updated: 2022/02/28 18:00:26 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/02/28 22:22:29 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 #include <math.h> 
 #include "libftprintf.h"
 #include <stdio.h> 
+
+/* secure bresenham called in the followed functions is just a safety to
+ * avoid writing out of the boundaries of the image 					*/
 
 void	ft_draw_horizontal(t_fdf_env *env, t_fdf_coords current_point,
 		int i, int j)
@@ -51,6 +54,10 @@ void	ft_draw_vertical(t_fdf_env *env, t_fdf_coords current_point,
 	if (i < env->map->y_max)
 		ft_secure_bresenham(env, current_point, 0xffffff, env->map->z[i][j]);
 }
+
+/* cycle through all the maps from coords (0,0) to coords (col_max, line_max)
+ * calls the functions above to print at each given (i, j) point the line 
+ * horizontal going to (i, j + 1) and the vertical one going to (i + 1, j) */
 
 void	ft_draw_map(t_fdf_env *env)
 {

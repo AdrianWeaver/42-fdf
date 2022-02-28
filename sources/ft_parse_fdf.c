@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 11:42:46 by aweaver           #+#    #+#             */
-/*   Updated: 2022/02/28 16:31:41 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/02/28 22:20:07 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include "libft.h"
 #include "libftprintf.h"
 #include "get_next_line.h"
+
+/* sets up the map, use of malloc could have been avoided here			*/
 
 t_fdf_map	*ft_init_fdf_map(t_fdf_env *env)
 {
@@ -27,11 +29,17 @@ t_fdf_map	*ft_init_fdf_map(t_fdf_env *env)
 	return (map);
 }
 
+/* frees the gnl right after it is used to memory is
+ * not kept hostage for no reasons after the use						*/
+
 t_fdf_str	*ft_getnext_gnl_and_free(t_fdf_str *gnl)
 {
 	free(gnl->str);
 	return (gnl->next);
 }
+
+/* reads the string given as input by gnl, returns an int in the form
+ * of an int** as such int[nb_of_lines][number_of_column] = value_z 	*/
 
 void	ft_fdf_parse(t_fdf_str *gnl, t_fdf_map *map)
 {
@@ -61,6 +69,9 @@ void	ft_fdf_parse(t_fdf_str *gnl, t_fdf_map *map)
 	}
 }
 
+/* behaves as a mutant combining a lst_new function if prev is NULL
+ * and a lst_addback otherwise by modifying the previous ->next			*/
+
 t_fdf_str	*ft_fdf_lst_addback_new(char *str, t_fdf_str *prev)
 {
 	t_fdf_str	*ret;
@@ -77,6 +88,10 @@ t_fdf_str	*ft_fdf_lst_addback_new(char *str, t_fdf_str *prev)
 		prev->next = ret;
 	return (ret);
 }
+
+/* opens the map, check for errors and exit if encountered.
+ * If the file is read, carries on with a gnl on it and send it to the
+ * parse fonction														*/
 
 int	ft_fdf_open_map(char *file, t_fdf_env *env)
 {
