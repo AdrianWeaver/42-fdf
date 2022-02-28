@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 07:52:36 by aweaver           #+#    #+#             */
-/*   Updated: 2022/02/28 22:11:00 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/02/28 22:36:07 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,10 @@ void	ft_get_z_max(t_fdf_env *env)
 	env->map->z_max = ret;
 }
 
+/* this function tries to make sure that the map is properly displayed inside
+ * the limits of the screen with the best possible size the default value for 
+ * the spread must be set quite high at first							*/
+
 void	ft_get_proportion(t_fdf_env *env)
 {
 	while ((sqrt((env->map->y_max * env->map->y_max)
@@ -47,6 +51,11 @@ void	ft_get_proportion(t_fdf_env *env)
 		env->var->spread = 2;
 	ft_get_z_max(env);
 }
+
+/* this function gets the coords where the point (0,0) will be casted 
+ * it does not include the value of z at the coords (0,0) therefore
+ * in extreme scenarii it would be possible for the coords (0,0) to be out of 
+ * boundaries															*/
 
 void	ft_get_start(t_fdf_env *env, t_fdf_coords *coords)
 {
@@ -73,15 +82,23 @@ void	ft_get_start(t_fdf_env *env, t_fdf_coords *coords)
 	env->var->start_y = coords->y1;
 }
 
+/* jumps to the next point to be drawn, i-e: for (i,j) (i, j+1)
+ * and for (i,last_column) it will simply return and the draw_map function
+ * will call ft_get_new_line instead */
+
 void	ft_get_new_point(t_fdf_env *env, t_fdf_coords *current,
 		int i, int j)
 {
+	if (j == env->map->x_max[i])
+		return ;
 	current->x1 += env->var->spread * cos(env->var->angle);
 	current->y1 += env->var->spread * sin(env->var->angle)
 		- (env->map->z[i][j] * env->var->mod_height);
 	if (j > 0)
 		current->y1 += (env->map->z[i][j - 1] * env->var->mod_height);
 }
+
+/* jump to the next line at first column */
 
 void	ft_get_new_line(t_fdf_env *env, t_fdf_coords *new_line, int i)
 {
