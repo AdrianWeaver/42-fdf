@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 15:57:22 by aweaver           #+#    #+#             */
-/*   Updated: 2022/02/26 10:34:17 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/02/28 10:48:50 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ typedef struct s_fdf_var
 {
 	int		mod_height;
 	int		spread;
+	int		center_x;
+	int		center_y;
 	int		start_x;
 	int		start_y;
 	double	angle;
@@ -88,6 +90,22 @@ typedef struct s_fdf_bresham
 }				t_fdf_bresham;
 # endif
 
+# ifndef FT_FDF_OPEN_MAP
+#  define FT_FDF_OPEN_MAP
+
+int		ft_fdf_open_map(char *file, t_fdf_env *env);
+
+# endif
+
+# ifndef FT_INIT_IMG
+#  define FT_INIT_IMG
+
+void	ft_init_img(t_fdf_env *env, t_fdf_img *img);
+
+# endif
+
+/* DRAWING FUNCTIONS */
+
 # ifndef FT_PUT_PIXEL_IMG
 #  define FT_PUT_PIXEL_IMG
 
@@ -97,16 +115,6 @@ void	ft_secure_bresenham(t_fdf_env *env, t_fdf_coords line,
 			unsigned long int col);
 
 # endif
-
-# ifndef FT_FDF_OPEN_MAP
-#  define FT_FDF_OPEN_MAP
-
-int		ft_fdf_open_map(char *file, t_fdf_env *env);
-
-# endif
-
-/* DRAWING FUNCTIONS */
-
 # ifndef FT_DRAW_MAP
 #  define FT_DRAW_MAP
 
@@ -156,6 +164,7 @@ void	ft_free_str(t_fdf_str *gnl);
 
 int		ft_check_keys(int keycode, t_fdf_env *env);
 int		ft_nuke_program(t_fdf_env *env);
+int		ft_redraw(t_fdf_env *env);
 
 # endif
 #endif
