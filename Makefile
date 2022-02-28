@@ -29,6 +29,7 @@ SRCS			=	ft_put_pixel_img.c		\
 					ft_free_map.c			\
 					ft_bresenham.c			\
 					ft_draw.c				\
+					ft_fdf_get.c			\
 					main.c
 					
 
@@ -70,9 +71,9 @@ retest:				re
 					./a.out
 
 test:				all
-					./a.out
+					./a.out test_maps/42.fdf
 
 valgrind:			re
-					valgrind --leak-check=full --show-leak-kinds=all -s ./a.out -D BUFFER_SIZE=100
+					valgrind --leak-check=full --show-leak-kinds=all -s ./a.out test_maps/42.fdf
 
 .PHONY:				re fclean all test
