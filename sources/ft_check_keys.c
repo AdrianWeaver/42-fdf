@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 08:11:34 by aweaver           #+#    #+#             */
-/*   Updated: 2022/02/28 10:34:27 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/02/28 11:45:37 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,32 +30,28 @@ static void	ft_make_square(t_fdf_env *env, t_fdf_img *img)
 		x++;
 	}
 }
-
-void	ft_boom(t_fdf_env *env)
+void	ft_check_rotate(int keycode, t_fdf_env *env)
 {
-	static int i;
-	static int j;
-	int mult;
-
-	mult = 0;
-	if (i < env->window_h)
+	if (keycode == KEY_A)
 	{
-		if (j < env->window_w)
-		{
-			while (mult < 100)
-			{
-				ft_put_pixel_img(env->img, j, i, 0x0000ff);
-				j++;
-				mult++;
-			}
-		}
-		else
-		{
-			i++;
-			j = 0;
-		}
+		env->var->angle += 0.7854;
+		if (env->var->angle >= 6)
+			env->var->angle = 0.5236;
+		ft_redraw(env);
 	}
-	ft_printf("Yes");
+}
+
+void	ft_check_translate(int keycode, t_fdf_env *env)
+{
+	if (keycode == KEY_LEFT)
+		env->var->center_x -= env->var->spread;
+	if (keycode == KEY_RIGHT)
+		env->var->center_x += env->var->spread;
+	if (keycode == KEY_UP)
+		env->var->center_y -= env->var->spread;
+	if (keycode == KEY_DOWN)
+		env->var->center_y += env->var->spread;
+	ft_redraw(env);
 }
 
 int	ft_check_keys(int keycode, t_fdf_env *env)
@@ -78,9 +74,9 @@ int	ft_check_keys(int keycode, t_fdf_env *env)
 			env->var->spread -= 5;
 		ft_redraw(env);
 	}
-	if (keycode == KEY_RIGHT)
-		ft_boom(env);
 	if (keycode == KEY_UP)
 		ft_make_square(env, env->img);
+	ft_check_translate(keycode, env);
+	ft_check_rotate(keycode, env);
 	return (0);
 }
