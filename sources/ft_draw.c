@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 11:29:10 by aweaver           #+#    #+#             */
-/*   Updated: 2022/02/26 11:00:08 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/02/28 08:41:40 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,48 +14,6 @@
 #include <math.h> 
 #include "libftprintf.h"
 #include <stdio.h> 
-
-void	ft_get_start(t_fdf_env *env, t_fdf_coords *coords)
-{
-	int		i;
-	int		mean_x;
-
-	i = -1;
-	mean_x = 0;
-	if (env->map->y_max <= 1)
-		env->map->y_max = 2;
-	while (++i < env->map->y_max)
-		mean_x += env->map->x_max[i];
-	mean_x /= env->map->y_max;
-	if (mean_x < 1)
-		mean_x = 2;
-	coords->x1 = (env->window_w / 2) - (mean_x / 2 * env->var->spread
-			* cos(env->var->angle));
-	coords->x1 += env->map->y_max / 2 * env->var->spread
-		* cos(env->var->angle);
-	coords->y1 = (env->window_h / 2) - (env->map->y_max / 2 * env->var->spread
-			* sin(env->var->angle));
-	coords->y1 -= mean_x / 2 * env->var->spread * sin(env->var->angle);
-	env->var->start_x = coords->x1;
-	env->var->start_y = coords->y1;
-}
-
-void	ft_get_new_point(t_fdf_env *env, t_fdf_coords *current,
-		int i, int j)
-{
-	current->x1 += env->var->spread * cos(env->var->angle);
-	current->y1 += env->var->spread * sin(env->var->angle) - env->map->z[i][j];
-	if (j > 0)
-		current->y1 += env->map->z[i][j - 1];
-}
-
-void	ft_get_new_line(t_fdf_env *env, t_fdf_coords *new_line, int i)
-{
-	if (i >= env->map->y_max)
-		return ;
-	new_line->x1 -= env->var->spread * cos(env->var->angle);
-	new_line->y1 += env->var->spread * sin(env->var->angle);
-}
 
 void	ft_draw_horizontal(t_fdf_env *env, t_fdf_coords current_point,
 		int i, int j)
@@ -90,4 +48,32 @@ void	ft_draw_vertical(t_fdf_env *env, t_fdf_coords current_point,
 	current_point.y2 = next_point.y1;
 	if (i < env->map->y_max)
 		ft_secure_bresenham(env, current_point, 0xffffff);
+}
+
+void	ft_draw_map(t_fdf_env *env)
+{
+	t_fdf_coords	start;
+	t_fdf_coords	new_line;
+	t_fdf_coords	current;
+	int				i;
+	int				j;
+
+	i = 0;
+	ft_get_start(env, &start);
+	new_line = start;
+	while (i < env->map->y_max)
+	{
+		j = 0;
+		current = new_line;
+		current.y1 -= env->map->z[i][j];
+		while (j < env->map->x_max[i])
+		{
+			ft_draw_horizontal(env, current, i, j);
+			ft_draw_vertical(env, current, i, j);
+			j++;
+			ft_get_new_point(env, &current, i, j);
+		}
+		i++;
+		ft_get_new_line(env, &new_line, i);
+	}
 }
