@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 07:52:36 by aweaver           #+#    #+#             */
-/*   Updated: 2022/02/28 12:41:45 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/02/28 13:39:25 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,10 @@ void	ft_get_new_point(t_fdf_env *env, t_fdf_coords *current,
 		int i, int j)
 {
 	current->x1 += env->var->spread * cos(env->var->angle);
-	current->y1 += env->var->spread * sin(env->var->angle) - env->map->z[i][j];
+	current->y1 += env->var->spread * sin(env->var->angle)
+		- (env->map->z[i][j] * env->var->mod_height);
 	if (j > 0)
-		current->y1 += env->map->z[i][j - 1];
+		current->y1 += (env->map->z[i][j - 1] * env->var->mod_height);
 }
 
 void	ft_get_new_line(t_fdf_env *env, t_fdf_coords *new_line, int i)

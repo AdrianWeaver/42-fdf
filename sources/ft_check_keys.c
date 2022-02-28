@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 08:11:34 by aweaver           #+#    #+#             */
-/*   Updated: 2022/02/28 12:42:02 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/02/28 13:22:40 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,17 @@ void	ft_check_rotate(int keycode, t_fdf_env *env)
 			env->var->angle = 0.5236;
 		ft_redraw(env);
 	}
+	if (keycode == KEY_D)
+	{
+		env->var->angle -= 0.7854;
+		if (env->var->angle <= 0)
+			env->var->angle = 0.7854;
+	}
+	if (keycode == KEY_W)
+		env->var->mod_height += 1;
+	if (keycode == KEY_S)
+		env->var->mod_height -= 1;
+	ft_redraw(env);
 }
 
 void	ft_check_translate(int keycode, t_fdf_env *env)

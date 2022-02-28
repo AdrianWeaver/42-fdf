@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 11:29:10 by aweaver           #+#    #+#             */
-/*   Updated: 2022/02/28 08:41:40 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/02/28 13:39:00 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	ft_draw_horizontal(t_fdf_env *env, t_fdf_coords current_point,
 	if (j > env->map->x_max[i])
 		return ;
 	next_point.x1 = current_point.x1 + env->var->spread * cos(env->var->angle);
-	next_point.y1 = current_point.y1 + env->var->spread * sin(env->var->angle)
-		- env->map->z[i][j + 1];
-	next_point.y1 += env->map->z[i][j];
+	next_point.y1 = current_point.y1 + (env->var->spread * sin(env->var->angle)
+			- (env->map->z[i][j + 1] * env->var->mod_height));
+	next_point.y1 += env->map->z[i][j] * env->var->mod_height;
 	current_point.x2 = next_point.x1;
 	current_point.y2 = next_point.y1;
 	if (j < env->map->x_max[i] - 1)
@@ -42,8 +42,8 @@ void	ft_draw_vertical(t_fdf_env *env, t_fdf_coords current_point,
 		return ;
 	next_point.x1 = current_point.x1 - env->var->spread * cos(env->var->angle);
 	next_point.y1 = current_point.y1 + (env->var->spread * sin(env->var->angle)
-			- env->map->z[i + 1][j]);
-	next_point.y1 += env->map->z[i][j];
+			- (env->map->z[i + 1][j] * env->var->mod_height));
+	next_point.y1 += env->map->z[i][j] * env->var->mod_height;
 	current_point.x2 = next_point.x1;
 	current_point.y2 = next_point.y1;
 	if (i < env->map->y_max)
