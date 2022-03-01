@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 07:52:36 by aweaver           #+#    #+#             */
-/*   Updated: 2022/02/28 22:39:06 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/03/01 15:44:10 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,12 @@ void	ft_get_start(t_fdf_env *env, t_fdf_coords *coords)
 	if (mean_x < 1)
 		mean_x = 2;
 	coords->x1 = env->var->center_x - (mean_x / 2 * env->var->spread
-			* cos(env->var->angle));
+			* cos(0.5236 + env->var->angle));
 	coords->x1 += env->map->y_max / 2 * env->var->spread
-		* cos(env->var->angle);
+		* cos(0.5236 - env->var->angle);
 	coords->y1 = env->var->center_y - (env->map->y_max / 2 * env->var->spread
-			* sin(env->var->angle));
-	coords->y1 -= mean_x / 2 * env->var->spread * sin(env->var->angle);
+			* sin(0.5236 - env->var->angle));
+	coords->y1 -= mean_x / 2 * env->var->spread * sin(0.5236 + env->var->angle);
 	env->var->start_x = coords->x1;
 	env->var->start_y = coords->y1;
 }
@@ -93,8 +93,8 @@ void	ft_get_new_point(t_fdf_env *env, t_fdf_coords *current,
 {
 	if (j == env->map->x_max[i])
 		return ;
-	current->x1 += env->var->spread * cos(env->var->angle);
-	current->y1 += env->var->spread * sin(env->var->angle)
+	current->x1 += env->var->spread * cos(0.5236 + env->var->angle);
+	current->y1 += env->var->spread * sin(0.5236 + env->var->angle)
 		- (env->map->z[i][j] * env->var->mod_height);
 	if (j > 0)
 		current->y1 += (env->map->z[i][j - 1] * env->var->mod_height);
@@ -106,6 +106,6 @@ void	ft_get_new_line(t_fdf_env *env, t_fdf_coords *new_line, int i)
 {
 	if (i > env->map->y_max)
 		return ;
-	new_line->x1 -= env->var->spread * cos(env->var->angle);
-	new_line->y1 += env->var->spread * sin(env->var->angle);
+	new_line->x1 -= env->var->spread * cos(0.5236 - env->var->angle);
+	new_line->y1 += env->var->spread * sin(0.5236 - env->var->angle);
 }

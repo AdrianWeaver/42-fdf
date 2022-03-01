@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 07:16:23 by aweaver           #+#    #+#             */
-/*   Updated: 2022/02/28 17:31:33 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/03/01 15:54:12 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_init_var(t_fdf_env *env, t_fdf_var *var)
 {
 	var->mod_height = 1;
 	var->spread = 10;
-	var->angle = 0.5236;
+	var->angle = 0;
 	var->center_x = env->window_w / 2;
 	var->center_y = env->window_h / 2;
 	env->var = var;
@@ -71,7 +71,6 @@ int	main_2(char **argv)
 	mlx_put_image_to_window(env.mlx_id, env.mlx_window, img.img_id, 0, 0);
 	mlx_hook(env.mlx_window, 3, 1L << 1, &ft_check_keys, &env);
 	mlx_hook(env.mlx_window, 17, 0, &ft_nuke_program, &env);
-	//mlx_hook(env.mlx_window, 25, 0, &ft_redraw, &env);
 	mlx_loop(env.mlx_id);
 	exit (0);
 }
