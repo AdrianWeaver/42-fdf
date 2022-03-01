@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 15:57:22 by aweaver           #+#    #+#             */
-/*   Updated: 2022/02/28 17:58:10 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/03/01 16:10:53 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ void	ft_get_new_line(t_fdf_env *env, t_fdf_coords *current, int i);
 void	ft_get_new_point(t_fdf_env *env, t_fdf_coords *current,	int i, int j);
 void	ft_get_z_max(t_fdf_env *env);
 void	ft_get_proportion(t_fdf_env *env);
-unsigned long int ft_get_colour(t_fdf_env *env, int z, int i);
+unsigned long int	ft_get_colour(t_fdf_env *env, int z, int i);
 
 # endif
 
