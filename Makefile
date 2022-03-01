@@ -38,6 +38,8 @@ OBJS			=	$(addprefix $(OBJS_PATH),$(SRCS:.c=.o))
 
 DEPS			=	$(OBJS:.o=.d)
 
+SILENT			=	--no-print-directory
+
 all:				$(NAME)
 
 $(NAME):			$(OBJS) $(MLX) $(LIBFT)
@@ -50,19 +52,19 @@ $(OBJS_PATH)%.o:	$(SRCS_PATH)%.c
 					@echo "\33[1;32mObj compiled \33[musing flag $(CFLAGS)"
 
 $(MLX):			
-					@$(MAKE) -C $(MLX_PATH)
+					@$(MAKE) $(SILENT) -C $(MLX_PATH)
 					@echo "\33[0;32m MLX COMPILED! \33[m"
 
 $(LIBFT):			
-					@$(MAKE) -C $(LIBFT_PATH)
+					@$(MAKE) $(SILENT) -C $(LIBFT_PATH)
 
 clean:		
 					@rm -rf $(OBJS_PATH)
-					@$(MAKE) -C $(LIBFT_PATH) clean
+					@$(MAKE) $(SILENT) -C $(LIBFT_PATH) clean
 					@echo "\33[0;36mCleaned objects and dependencies. \33[m"
 
 fclean:				clean
-					@$(MAKE) -C $(LIBFT_PATH) fclean
+					@$(MAKE) $(SILENT) -C $(LIBFT_PATH) fclean
 					@rm -f $(NAME)
 					@echo "\33[0;36mEverything is neat. \33[m"
 
