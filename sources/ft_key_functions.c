@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 08:02:00 by aweaver           #+#    #+#             */
-/*   Updated: 2022/03/01 15:57:43 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/03/01 17:35:01 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	ft_reset(t_fdf_env *env)
 {
 	env->var->center_x = (env->window_w / 2);
 	env->var->center_y = (env->window_h / 2);
-	env->var->angle = 0.5236;
+	env->var->angle = 0;
 	env->var->mod_height = 1;
 	env->var->spread = 10;
 	ft_redraw(env);
