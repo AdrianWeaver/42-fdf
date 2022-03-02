@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 15:57:22 by aweaver           #+#    #+#             */
-/*   Updated: 2022/03/01 16:10:53 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/03/02 10:24:58 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ typedef struct s_fdf_var
 	int		center_y;
 	int		start_x;
 	int		start_y;
+	int		start_spread;
+	double	o;
 	double	angle;
 }				t_fdf_var;
 

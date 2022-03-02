@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 11:29:10 by aweaver           #+#    #+#             */
-/*   Updated: 2022/03/02 09:39:34 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/03/02 10:13:36 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ void	ft_draw_horizontal(t_fdf_env *env, t_fdf_coords current_point,
 		int i, int j)
 {
 	current_point.x2 = current_point.x1 + env->var->spread
-		* cos(0.5236 + env->var->angle);
+		* cos(env->var->o + env->var->angle);
 	if (j < env->map->x_max[i] - 1)
 	{
 		current_point.y2 = current_point.y1 + env->var->spread
-			* sin(0.5236 + env->var->angle) - (env->map->z[i][j + 1]
+			* sin(env->var->o + env->var->angle) - (env->map->z[i][j + 1]
 				* env->var->mod_height);
 		current_point.y1 -= (env->map->z[i][j] * env->var->mod_height);
-		ft_secure_bresenham(env, current_point, 0x0057b7, env->map->z[i][j]);
+		ft_secure_bresenham(env, current_point, 0xffd700, env->map->z[i][j]);
 	}
 }
 
@@ -39,14 +39,15 @@ void	ft_draw_vertical(t_fdf_env *env, t_fdf_coords to_draw,
 {
 	if (i >= env->map->y_max - 1)
 		return ;
-	to_draw.x2 = to_draw.x1 - env->var->spread * cos(0.5236 - env->var->angle);
+	to_draw.x2 = to_draw.x1 - env->var->spread
+		* cos(env->var->o - env->var->angle);
 	if (i < env->map->y_max)
 	{
 		to_draw.y2 = to_draw.y1 + (env->var->spread
-				* sin(0.5236 - env->var->angle)) - (env->map->z[i + 1][j]
+				* sin(env->var->o - env->var->angle)) - (env->map->z[i + 1][j]
 				* env->var->mod_height);
 	to_draw.y1 -= (env->map->z[i][j] * env->var->mod_height);
-		ft_secure_bresenham(env, to_draw, 0xffd700, env->map->z[i][j]);
+		ft_secure_bresenham(env, to_draw, 0x0057b7, env->map->z[i][j]);
 	}
 }
 
