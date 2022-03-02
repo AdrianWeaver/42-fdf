@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 08:02:00 by aweaver           #+#    #+#             */
-/*   Updated: 2022/03/02 10:25:43 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/03/02 15:27:05 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,5 @@ int	ft_redraw(t_fdf_env *env)
 	mlx_put_image_to_window(env->mlx_id, env->mlx_window, env->img->img_id,
 		0, 0);
 	mlx_destroy_image(env->mlx_id, save);
-	ft_printf("redo\n");
 	return (0);
 }

@@ -6,12 +6,13 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 07:52:36 by aweaver           #+#    #+#             */
-/*   Updated: 2022/03/02 10:25:20 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/03/02 15:25:16 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include "ft_fdf.h"
+#include "libftprintf.h"
 
 /* gets the highest point of the map, used for the gradient coloring funct */
 
@@ -49,6 +50,7 @@ void	ft_get_proportion(t_fdf_env *env)
 				+ (env->map->x_max[0] * env->map->x_max[0]))
 			* env->var->spread) > env->window_w)
 		env->var->spread--;
+	env->var->spread--;
 	if (env->var->spread < 2)
 		env->var->spread = 2;
 	env->var->start_spread = env->var->spread;
@@ -64,24 +66,23 @@ void	ft_get_start(t_fdf_env *env, t_fdf_coords *coords)
 {
 	int		i;
 	int		mean_x;
+	int		halfx;
+	int		half_y;
 
 	i = -1;
 	mean_x = 0;
-	if (env->map->y_max <= 1)
-		env->map->y_max = 2;
+	half_y = (env->map->y_max / 2) + 0.5;
 	while (++i < env->map->y_max)
 		mean_x += env->map->x_max[i];
 	mean_x /= env->map->y_max;
-	if (mean_x < 1)
-		mean_x = 2;
-	coords->x1 = env->var->center_x - (mean_x / 2 * env->var->spread
+	halfx = (mean_x / 2) + 0.5;
+	coords->x1 = env->var->center_x - (halfx * env->var->spread
 			* cos(env->var->o + env->var->angle));
-	coords->x1 += env->map->y_max / 2 * env->var->spread
+	coords->x1 += half_y * env->var->spread
 		* cos(env->var->o - env->var->angle);
-	coords->y1 = env->var->center_y - (env->map->y_max / 2 * env->var->spread
+	coords->y1 = env->var->center_y - (half_y * env->var->spread
 			* sin(env->var->o - env->var->angle));
-	coords->y1 -= mean_x / 2 * env->var->spread
-		* sin(env->var->o + env->var->angle);
+	coords->y1 -= halfx * env->var->spread * sin(env->var->o + env->var->angle);
 	env->var->start_x = coords->x1;
 	env->var->start_y = coords->y1;
 }

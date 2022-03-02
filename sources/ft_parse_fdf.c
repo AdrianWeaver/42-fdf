@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 11:42:46 by aweaver           #+#    #+#             */
-/*   Updated: 2022/02/28 22:20:07 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/03/02 15:26:55 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ft_fdf_parse(t_fdf_str *gnl, t_fdf_map *map)
 	current_line = 0;
 	map->z = malloc(sizeof(int *) * map->y_max);
 	map->x_max = malloc(sizeof(int *) * map->y_max);
-	while (gnl-> str != 0)
+	while (gnl != 0)
 	{
 		i = -1;
 		split_output = ft_split(gnl->str, ' ');
@@ -72,10 +72,16 @@ void	ft_fdf_parse(t_fdf_str *gnl, t_fdf_map *map)
 /* behaves as a mutant combining a lst_new function if prev is NULL
  * and a lst_addback otherwise by modifying the previous ->next			*/
 
-t_fdf_str	*ft_fdf_lst_addback_new(char *str, t_fdf_str *prev)
+t_fdf_str	*ft_fdf_lst_addback_new(t_fdf_env *env, char *str, t_fdf_str *prev)
 {
 	t_fdf_str	*ret;
 
+	if (prev == env->img->img_str)
+		prev = NULL;
+	if (str == 0)
+	{
+		return (0);
+	}
 	ret = malloc(sizeof(*ret) * 1);
 	if (ret == 0)
 		return (0);
@@ -104,20 +110,20 @@ int	ft_fdf_open_map(char *file, t_fdf_env *env)
 	if (fd == -1)
 		exit (-1);
 	map = ft_init_fdf_map(env);
-	gnl = ft_fdf_lst_addback_new(get_next_line(fd), NULL);
-	gnl_start = gnl;
-	map->y_max++;
-	while (1)
+	gnl = env->img->img_str;
+	gnl_start = NULL;
+	while (gnl)
 	{
-		gnl = ft_fdf_lst_addback_new(get_next_line(fd), gnl);
-		if (gnl->str == NULL)
-			break ;
-		map->y_max++;
+		gnl = ft_fdf_lst_addback_new(env, get_next_line(fd), gnl);
+		if (gnl_start == NULL && gnl != env->mlx_id)
+			gnl_start = gnl;
+		if (gnl != 0 && gnl->str != NULL)
+			map->y_max++;
 	}
 	get_next_line(GNL_FLUSH);
-	gnl = gnl_start;
-	ft_fdf_parse(gnl, map);
-	ft_free_str(gnl);
-	close(fd);
-	return (0);
+	if (gnl_start == 0)
+		ft_nuke_empty(env);
+	ft_fdf_parse(gnl_start, map);
+	ft_free_str(gnl_start);
+	return (close(fd));
 }

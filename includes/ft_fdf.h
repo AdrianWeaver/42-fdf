@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 15:57:22 by aweaver           #+#    #+#             */
-/*   Updated: 2022/03/02 10:24:58 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/03/02 13:09:13 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,7 @@ unsigned long int	ft_get_colour(t_fdf_env *env, int z, int i);
 
 void	ft_free_map(t_fdf_env *env);
 void	ft_free_str(t_fdf_str *gnl);
+void	ft_nuke_empty(t_fdf_env *env);
 
 /* KEYHOOK FUNCTIONS */
 

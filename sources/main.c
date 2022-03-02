@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 07:16:23 by aweaver           #+#    #+#             */
-/*   Updated: 2022/03/02 10:10:21 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/03/02 12:59:03 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 void	ft_init_var(t_fdf_env *env, t_fdf_var *var)
 {
 	var->mod_height = 1;
-	var->spread = 30;
+	var->spread = 50;
 	var->o = 0.5236;
 	var->angle = 0;
 	var->center_x = env->window_w / 2;
