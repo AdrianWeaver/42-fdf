@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 08:11:34 by aweaver           #+#    #+#             */
-/*   Updated: 2022/03/02 10:17:59 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/03/02 10:38:49 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_check_rotate(int keycode, t_fdf_env *env)
 	if (keycode == KEY_A)
 	{
 		env->var->o = 0.5236;
-		env->var->angle += 0.5236;
+		env->var->angle += 0.2618;
 		if (env->var->angle >= 6)
 			env->var->angle = 0.5236;
 		ft_redraw(env);
@@ -26,7 +26,7 @@ void	ft_check_rotate(int keycode, t_fdf_env *env)
 	if (keycode == KEY_D)
 	{
 		env->var->o = 0.5236;
-		env->var->angle -= 0.5236;
+		env->var->angle -= 0.2618;
 		if (env->var->angle <= 0.5)
 			env->var->angle = 6.2832;
 		ft_redraw(env);
