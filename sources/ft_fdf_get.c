@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 07:52:36 by aweaver           #+#    #+#             */
-/*   Updated: 2022/03/01 18:28:44 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/03/02 09:15:39 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,17 +88,13 @@ void	ft_get_start(t_fdf_env *env, t_fdf_coords *coords)
  * and for (i,last_column) it will simply return and the draw_map function
  * will call ft_get_new_line instead */
 
-//need to remove entirely z from here
 void	ft_get_new_point(t_fdf_env *env, t_fdf_coords *current,
 		int i, int j)
 {
 	if (j == env->map->x_max[i])
 		return ;
 	current->x1 += env->var->spread * cos(0.5236 + env->var->angle);
-	current->y1 += env->var->spread * sin(0.5236 + env->var->angle)
-		- (env->map->z[i][j] * env->var->mod_height);
-	if (j > 0)
-		current->y1 += (env->map->z[i][j - 1] * env->var->mod_height);
+	current->y1 += env->var->spread * sin(0.5236 + env->var->angle);
 }
 
 /* jump to the next line at first column */
@@ -107,6 +103,8 @@ void	ft_get_new_line(t_fdf_env *env, t_fdf_coords *new_line, int i)
 {
 	if (i > env->map->y_max)
 		return ;
-	new_line->x1 = env->var->start_x - i * env->var->spread * cos(0.5236 - env->var->angle);
-	new_line->y1 = env->var->start_y + i * env->var->spread * sin(0.5236 - env->var->angle);
+	new_line->x1 = env->var->start_x - i * env->var->spread
+		* cos(0.5236 - env->var->angle);
+	new_line->y1 = env->var->start_y + i * env->var->spread
+		* sin(0.5236 - env->var->angle);
 }
