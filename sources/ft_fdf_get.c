@@ -6,39 +6,13 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 07:52:36 by aweaver           #+#    #+#             */
-/*   Updated: 2022/03/02 15:25:16 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/03/02 15:52:24 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include "ft_fdf.h"
 #include "libftprintf.h"
-
-/* gets the highest point of the map, used for the gradient coloring funct */
-
-void	ft_get_z_max(t_fdf_env *env)
-{
-	int	i;
-	int	j;
-	int	ret;
-
-	ret = 0;
-	i = 0;
-	while (i < env->map->y_max)
-	{
-		j = 0;
-		while (j < env->map->x_max[i])
-		{
-			if (env->map->z[i][j] > ret)
-				ret = env->map->z[i][j];
-			j++;
-		}
-		i++;
-	}
-	if (ret > 255)
-		ret = 255;
-	env->map->z_max = ret;
-}
 
 /* this function tries to make sure that the map is properly displayed inside
  * the limits of the screen with the best possible size the default value for 

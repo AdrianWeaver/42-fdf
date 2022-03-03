@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 11:29:10 by aweaver           #+#    #+#             */
-/*   Updated: 2022/03/02 15:27:26 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/03/03 16:04:43 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,23 @@
 /* secure bresenham called in the followed functions is just a safety to
  * avoid writing out of the boundaries of the image 					*/
 
-void	ft_draw_horizontal(t_fdf_env *env, t_fdf_coords current_point,
+void	ft_draw_horizontal(t_fdf_env *env, t_fdf_coords to_draw,
 		int i, int j)
 {
-	current_point.x2 = current_point.x1 + env->var->spread
+	to_draw.x2 = to_draw.x1 + env->var->spread
 		* cos(env->var->o + env->var->angle);
 	if (j < env->map->x_max[i] - 1)
 	{
-		current_point.y2 = current_point.y1 + env->var->spread
+		to_draw.y2 = to_draw.y1 + env->var->spread
 			* sin(env->var->o + env->var->angle) - (env->map->z[i][j + 1]
 				* env->var->mod_height);
-		current_point.y1 -= (env->map->z[i][j] * env->var->mod_height);
-		ft_secure_bresenham(env, current_point, 0xffd700, env->map->z[i][j]);
+		to_draw.y1 -= (env->map->z[i][j] * env->var->mod_height);
+		ft_get_colour(env, env->map->z[i][j]);
+		ft_secure_bresenham(env, to_draw, env->var->colour,
+			env->map->z[i][j]);
 	}
 }
+//ft_secure_bresenham(env, current_point, 0xffd700, env->map->z[i][j]);
 
 void	ft_draw_vertical(t_fdf_env *env, t_fdf_coords to_draw,
 		int i, int j)
@@ -47,9 +50,11 @@ void	ft_draw_vertical(t_fdf_env *env, t_fdf_coords to_draw,
 				* sin(env->var->o - env->var->angle)) - (env->map->z[i + 1][j]
 				* env->var->mod_height);
 	to_draw.y1 -= (env->map->z[i][j] * env->var->mod_height);
-		ft_secure_bresenham(env, to_draw, 0x0057b7, env->map->z[i][j]);
+		ft_get_colour(env, env->map->z[i][j]);
+		ft_secure_bresenham(env, to_draw, env->var->colour, env->map->z[i][j]);
 	}
 }
+//ft_secure_bresenham(env, to_draw, 0x0057b7, env->map->z[i][j]);
 
 /* cycle through all the maps from coords (0,0) to coords (col_max, line_max)
  * calls the functions above to print at each given (i, j) point the line 

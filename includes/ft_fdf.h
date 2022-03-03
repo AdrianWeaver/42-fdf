@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 15:57:22 by aweaver           #+#    #+#             */
-/*   Updated: 2022/03/02 13:09:13 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/03/03 16:30:07 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,12 @@
 
 # ifndef MLX_FAILURE
 #  define MLX_FAILURE "MLX couldn't establish a connection with a display"
+
+# endif
+# ifndef FDF_COLOURS
+#  define FDF_COLOURS
+#  define MIN_COLOUR 0xff0000
+#  define MAX_COLOUR 0x00ff00
 
 # endif
 
@@ -40,6 +46,7 @@ typedef struct s_fdf_map
 	int			y_max;
 	int			**z;
 	int			z_max;
+	int			z_min;
 }				t_fdf_map;
 
 typedef struct s_fdf_str
@@ -65,6 +72,8 @@ typedef struct s_fdf_var
 	int		start_x;
 	int		start_y;
 	int		start_spread;
+	double	step;
+	double	colour;
 	double	o;
 	double	angle;
 }				t_fdf_var;
@@ -90,6 +99,8 @@ typedef struct s_fdf_bresham
 	int	dy_start;
 	int	x_incr;
 	int	y_incr;
+	int	z;
+	int	z_next;
 }				t_fdf_bresham;
 # endif
 
@@ -113,9 +124,8 @@ void	ft_init_img(t_fdf_env *env, t_fdf_img *img);
 #  define FT_PUT_PIXEL_IMG
 
 void	ft_put_pixel_img(t_fdf_img *img, int x, int y, int colour);
-void	ft_bresenham(t_fdf_env *env, t_fdf_coords line,	unsigned long int col, int z);
-void	ft_secure_bresenham(t_fdf_env *env, t_fdf_coords line,
-			unsigned long int col, int z);
+void	ft_bresenham(t_fdf_env *env, t_fdf_coords line,	int z, int z_next);
+void	ft_secure_bresenham(t_fdf_env *env, t_fdf_coords line, int z, int z_n);
 
 # endif
 # ifndef FT_DRAW_MAP
@@ -140,8 +150,10 @@ void	ft_get_start(t_fdf_env *env, t_fdf_coords *coords);
 void	ft_get_new_line(t_fdf_env *env, t_fdf_coords *current, int i);
 void	ft_get_new_point(t_fdf_env *env, t_fdf_coords *current,	int i, int j);
 void	ft_get_z_max(t_fdf_env *env);
+void	ft_get_z_min(t_fdf_env *env);
 void	ft_get_proportion(t_fdf_env *env);
-unsigned long int	ft_get_colour(t_fdf_env *env, int z, int i);
+void	ft_get_colour(t_fdf_env *env, int z);
+double	ft_bres_colour(t_fdf_env *env, int px_max, int incr, t_fdf_bresham b);
 
 # endif
 
