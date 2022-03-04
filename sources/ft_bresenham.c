@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 08:30:06 by aweaver           #+#    #+#             */
-/*   Updated: 2022/03/03 16:02:14 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/03/04 12:23:42 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,10 @@ void	ft_bresenham_higher(t_fdf_env *env, t_fdf_coords line,
 	i = 0;
 	while (i < bresham.dx_start)
 	{
+		//ft_put_pixel_img(env->img, line.x1, line.y1, env->var->colour);
+		//if (i == -1)
 		ft_put_pixel_img(env->img, line.x1, line.y1,
-			ft_bres_colour(env, bresham.dx_start, bresham.x_incr, bresham));
+			ft_bres_colour(env, bresham.dx_start, bresham.x_incr, bresham, i));
 		i++;
 		line.x1 += bresham.x_incr;
 		bresham.ex -= bresham.dy;
@@ -61,8 +63,10 @@ void	ft_bresenham_lower(t_fdf_env *env, t_fdf_coords line,
 	i = 0;
 	while (i <= bresham.dy_start)
 	{
+		//ft_put_pixel_img(env->img, line.x1, line.y1, env->var->colour);
+		//if (i == -1)
 		ft_put_pixel_img(env->img, line.x1, line.y1,
-			ft_bres_colour(env, bresham.dy_start, bresham.y_incr, bresham));
+			ft_bres_colour(env, bresham.dy_start, bresham.y_incr, bresham, i));
 		i++;
 		line.y1 += bresham.y_incr;
 		bresham.ey -= bresham.dx;
