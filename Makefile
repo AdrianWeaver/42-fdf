@@ -74,7 +74,7 @@ retest:				re
 					./a.out
 
 test:				all
-					./a.out test_maps/42powa.fdf
+					./a.out test_maps/test.fdf
 
 valgrind:			re
 					valgrind --leak-check=full --show-leak-kinds=all -s ./a.out test_maps/42.fdf
