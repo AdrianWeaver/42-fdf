@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 11:29:10 by aweaver           #+#    #+#             */
-/*   Updated: 2022/03/04 13:32:19 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/03/06 20:22:41 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,10 @@ void	ft_draw_horizontal(t_fdf_env *env, t_fdf_coords to_draw,
 				* env->var->mod_height);
 		to_draw.y1 -= (env->map->z[i][j] * env->var->mod_height);
 		env->var->colour = ft_get_colour(env, env->map->z[i][j]);
-		ft_secure_bresenham(env, to_draw, env->var->colour,
-			env->map->z[i][j]);
+		//ft_secure_bresenham(env, to_draw, env->var->colour,
+			//env->map->z[i][j]);
+		ft_secure_bresenham(env, to_draw, env->map->z[i][j],
+			env->map->z[i][j + 1]);
 	}
 }
 //ft_secure_bresenham(env, current_point, 0xffd700, env->map->z[i][j]);
@@ -51,7 +53,9 @@ void	ft_draw_vertical(t_fdf_env *env, t_fdf_coords to_draw,
 				* env->var->mod_height);
 	to_draw.y1 -= (env->map->z[i][j] * env->var->mod_height);
 		env->var->colour = ft_get_colour(env, env->map->z[i][j]);
-		ft_secure_bresenham(env, to_draw, env->var->colour, env->map->z[i][j]);
+		//ft_secure_bresenham(env, to_draw, env->var->colour, env->map->z[i][j]);
+		ft_secure_bresenham(env, to_draw, env->map->z[i][j],
+			env->map->z[i + 1][j]);
 	}
 }
 //ft_secure_bresenham(env, to_draw, 0x0057b7, env->map->z[i][j]);
