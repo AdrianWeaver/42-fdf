@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 15:57:22 by aweaver           #+#    #+#             */
-/*   Updated: 2022/03/07 07:26:46 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/03/07 11:05:03 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,19 +89,29 @@ typedef struct s_fdf_env
 	t_fdf_var	*var;
 }				t_fdf_env;
 
+typedef struct s_fdf_col
+{
+	int	red;
+	int	green;
+	int	blue;
+}				t_fdf_col;
+
 typedef struct s_fdf_bresham
 {
-	int	ex;
-	int	ey;
-	int	dx;
-	int	dy;
-	int	dx_start;
-	int	dy_start;
-	int	x_incr;
-	int	y_incr;
-	int	z;
-	int	z_next;
+	int			ex;
+	int			ey;
+	int			dx;
+	int			dy;
+	int			dx_start;
+	int			dy_start;
+	int			x_incr;
+	int			y_incr;
+	int			z;
+	int			z_next;
+	t_fdf_col	col;
+	double		i;
 }				t_fdf_bresham;
+
 # endif
 
 # ifndef FT_FDF_OPEN_MAP
@@ -151,11 +161,12 @@ void	ft_get_new_line(t_fdf_env *env, t_fdf_coords *current, int i);
 void	ft_get_new_point(t_fdf_env *env, t_fdf_coords *current,	int i, int j);
 void	ft_get_z_max(t_fdf_env *env);
 void	ft_get_z_min(t_fdf_env *env);
+void	ft_get_step(t_fdf_env *env);
+double	ft_get_argb(int a, int r, int g, int b);
+double	ft_get_gradient(t_fdf_env *env, t_fdf_bresham b, int px_max, double i);
 void	ft_get_proportion(t_fdf_env *env);
 double	ft_get_colour(t_fdf_env *env, int z);
-void	ft_get_step(t_fdf_env *env);
-double	ft_bres_colour(t_fdf_env *env, int px_max, int incr, t_fdf_bresham b,
-			double i);
+double	ft_bres_colour(t_fdf_env *env, int px_max, t_fdf_bresham b);
 
 # endif
 
