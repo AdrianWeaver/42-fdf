@@ -31,6 +31,7 @@ SRCS			=	ft_put_pixel_img.c		\
 					ft_draw.c				\
 					ft_fdf_get.c			\
 					ft_gradient.c			\
+					ft_get_gradient.c		\
 					main.c
 					
 
@@ -74,7 +75,7 @@ retest:				re
 					./a.out
 
 test:				all
-					./a.out test_maps/test.fdf
+					./a.out test_maps/42powa.fdf
 
 valgrind:			re
 					valgrind --leak-check=full --show-leak-kinds=all -s ./a.out test_maps/42.fdf
