@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/04 15:57:22 by aweaver           #+#    #+#             */
-/*   Updated: 2022/03/04 13:31:15 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/03/07 07:26:46 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,8 @@ void	ft_get_z_min(t_fdf_env *env);
 void	ft_get_proportion(t_fdf_env *env);
 double	ft_get_colour(t_fdf_env *env, int z);
 void	ft_get_step(t_fdf_env *env);
-double	ft_bres_colour(t_fdf_env *env, int px_max, int incr, t_fdf_bresham b, int i);
+double	ft_bres_colour(t_fdf_env *env, int px_max, int incr, t_fdf_bresham b,
+			double i);
 
 # endif
 

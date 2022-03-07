@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 15:08:53 by aweaver           #+#    #+#             */
-/*   Updated: 2022/03/06 21:01:20 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/03/07 07:45:16 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ void	ft_get_step(t_fdf_env *env)
 
 double	ft_get_argb(int a, int red, int green, int blue)
 {
-	double argb;
+	double	argb;
+
 	if (red >= 255)
 		red = 255;
 	if (green >= 255)
@@ -93,10 +94,10 @@ double	ft_get_argb(int a, int red, int green, int blue)
 	if (blue < 0)
 		blue = 0;
 	argb = a << 24 | red << 16 | green << 8 | blue;
-	printf("get argb argb = %f\n", argb);
-	printf("Function get argb red = %d\n", (int)argb >> 16 & 0xff);
-	printf("Function get argb green = %d\n", (int)argb >> 8 & 0xff);
-	printf("Function get argb blue = %d\n", (int)argb & 0xff);
+	//printf("get argb argb = %f\n", argb);
+	//printf("Function get argb red = %d\n", (int)argb >> 16 & 0xff);
+	//printf("Function get argb green = %d\n", (int)argb >> 8 & 0xff);
+	//printf("Function get argb blue = %d\n", (int)argb & 0xff);
 	return (argb);
 }
 
@@ -104,7 +105,7 @@ double	ft_get_argb(int a, int red, int green, int blue)
  * GREEN = (int)colour >> 8 & 0xff;
  * BLUE = (int)colour & 0xff;
  */
-double ft_get_gradient(t_fdf_env *env, t_fdf_bresham b, int pixel_max)
+double	ft_get_gradient(t_fdf_env *env, t_fdf_bresham b, int pixel_max)
 {
 	int	blue_at_z;
 	int	blue_at_next;
@@ -114,9 +115,12 @@ double ft_get_gradient(t_fdf_env *env, t_fdf_bresham b, int pixel_max)
 	colour_z = (int)env->var->colour;
 	blue_at_z = colour_z & 0xff;
 	colour_next = (int)ft_get_colour(env, b.z_next);
+	printf("\n\n==GET GRADIENT\n");
 	printf("Function gradient >> colour_z = %d, colour_next = %d\n", colour_z,
 			colour_next);
-	blue_at_next = (colour_next & 0xff);
+	blue_at_next = ((int)colour_next & 0xff);
+	//if (blue_at_next == 0 && blue_at_z == 0 && b.z != b.z_next)
+		//blue_at_z = 255;
 	printf("Function gradient blue_at_next = %d blue_at_z = %d\n", blue_at_next, blue_at_z);
 	printf("Function gradient colour_z red = %d\n", (int)colour_z >> 16 & 0xff);
 	printf("Function gradient colour_z green = %d\n", (int)colour_z >> 8 & 0xff);
@@ -126,7 +130,7 @@ double ft_get_gradient(t_fdf_env *env, t_fdf_bresham b, int pixel_max)
 	printf("Function gradient colour_next blue = %d\n", (int)colour_next & 0xff);
 	if (pixel_max == 0)
 		return (blue_at_next - blue_at_z);
-	return (((((double)blue_at_next) - ((double)blue_at_z)) / (double)pixel_max));
+	return (((((double)(abs(blue_at_next - blue_at_z))) / (double)pixel_max)));
 }
 
 int	ft_up_colour(double colour, int bitshift, double to_add)
@@ -144,19 +148,19 @@ int	ft_up_colour(double colour, int bitshift, double to_add)
 }
 
 double	ft_bres_colour(t_fdf_env *env, int pixel_max, int incr,
-		t_fdf_bresham b, int i)
+		t_fdf_bresham b, double i)
 {
 	double		gradient;
-	int		red;
-	int		green;
-	int		blue;
-	int		slope;
+	int			red;
+	int			green;
+	int			blue;
+	double		slope;
 
 	(void)incr;
-	printf("\n\n==BRES COLOUR\n");
-	slope = 1;
+	//printf("\n\n==BRES COLOUR\n");
+	slope = 1.0;
 	if (b.z > b.z_next)
-		slope = -1;
+		slope = -1.0;
 	red = (int)env->var->colour >> 16 & 0xff;
 	green = (int)env->var->colour >> 8 & 0xff;
 	blue = (int)env->var->colour & 0xff;
@@ -166,11 +170,11 @@ double	ft_bres_colour(t_fdf_env *env, int pixel_max, int incr,
 	if (blue == 255)
 	{
 		blue = ft_up_colour(env->var->colour, 0, - (i * slope * gradient));
-		if (slope == 1)
+		if (b.z < b.z_next)//(slope == 1)
 		{
 			green = ft_up_colour(env->var->colour, 8, (i * slope * gradient));
 		}
-		else if (slope == -1)
+		else if (b.z > b.z_next) //(slope == -1)
 		{
 			red = ft_up_colour(env->var->colour, 16, (i * slope * gradient));
 		}
@@ -195,22 +199,23 @@ double	ft_get_colour(t_fdf_env *env, int z)
 
 	z_mid = env->map->z_max
 		- ((env->map->z_max - env->map->z_min) / 2);
-	if (z < z_mid)
+	if (z <= z_mid)
 	{
 		colour = MIN_COLOUR;
 		colour -= (((int)((float)z * env->var->step)) << 16);
 		colour += (((int)((float)z * env->var->step)));
 	}
-	else if (z == z_mid)
-		colour = 0x0000ff;	
+	//else if (z == z_mid)
+		//colour = 0x0000ff;	
 	else if (z > z_mid)
 	{
 		colour = MAX_COLOUR;
-		colour -= (((int)(z * env->var->step)) << 8);
-		colour += (((int)(z * env->var->step)));
+		colour = ft_get_argb(1, (int)colour >> 16,
+			ft_up_colour(colour, 8, - ((env->map->z_max - z) * env->var->step)),
+			ft_up_colour(colour, 0, ((env->map->z_max - z) * env->var->step)));
 	}
-	printf("Function get colour red = %d\n", (int)colour >> 16 & 0xff);
-	printf("Function get colour green = %d\n", (int)colour >> 8 & 0xff);
-	printf("Function get colour blue = %d\n", (int)colour & 0xff);
+	//printf("Function get colour red = %d\n", (int)colour >> 16 & 0xff);
+	//printf("Function get colour green = %d\n", (int)colour >> 8 & 0xff);
+	//printf("Function get colour blue = %d\n", (int)colour & 0xff);
 	return (colour);
 }

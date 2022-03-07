@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 11:29:10 by aweaver           #+#    #+#             */
-/*   Updated: 2022/03/06 20:22:41 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/03/07 07:06:41 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ void	ft_draw_horizontal(t_fdf_env *env, t_fdf_coords to_draw,
 				* env->var->mod_height);
 		to_draw.y1 -= (env->map->z[i][j] * env->var->mod_height);
 		env->var->colour = ft_get_colour(env, env->map->z[i][j]);
-		//ft_secure_bresenham(env, to_draw, env->var->colour,
-			//env->map->z[i][j]);
 		ft_secure_bresenham(env, to_draw, env->map->z[i][j],
 			env->map->z[i][j + 1]);
 	}
@@ -53,12 +51,10 @@ void	ft_draw_vertical(t_fdf_env *env, t_fdf_coords to_draw,
 				* env->var->mod_height);
 	to_draw.y1 -= (env->map->z[i][j] * env->var->mod_height);
 		env->var->colour = ft_get_colour(env, env->map->z[i][j]);
-		//ft_secure_bresenham(env, to_draw, env->var->colour, env->map->z[i][j]);
 		ft_secure_bresenham(env, to_draw, env->map->z[i][j],
 			env->map->z[i + 1][j]);
 	}
 }
-//ft_secure_bresenham(env, to_draw, 0x0057b7, env->map->z[i][j]);
 
 /* cycle through all the maps from coords (0,0) to coords (col_max, line_max)
  * calls the functions above to print at each given (i, j) point the line 
