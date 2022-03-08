@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 10:51:23 by aweaver           #+#    #+#             */
-/*   Updated: 2022/03/02 13:12:50 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/03/08 10:20:47 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,22 @@ void	ft_free_str(t_fdf_str *gnl)
 		gnl = gnl->next;
 		free(save);
 	}
+}
+
+void	ft_nuke_wrong_fd(t_fdf_env *env)
+{
+	if (env->img)
+	{	
+		if (env->img->img_id)
+		{
+			mlx_destroy_image(env->mlx_id, env->img->img_id);
+		}
+	}
+	mlx_destroy_window(env->mlx_id, env->mlx_window);
+	mlx_destroy_display(env->mlx_id);
+	free(env->mlx_id);
+	ft_printf("The progran could not open the map you provided\n");
+	exit (-1);
 }
 
 void	ft_nuke_empty(t_fdf_env *env)

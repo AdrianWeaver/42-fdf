@@ -6,7 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 11:42:46 by aweaver           #+#    #+#             */
-/*   Updated: 2022/03/02 15:26:55 by aweaver          ###   ########.fr       */
+/*   Updated: 2022/03/08 10:03:05 by aweaver          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int	ft_fdf_open_map(char *file, t_fdf_env *env)
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		exit (-1);
+		ft_nuke_wrong_fd(env);
 	map = ft_init_fdf_map(env);
 	gnl = env->img->img_str;
 	gnl_start = NULL;
