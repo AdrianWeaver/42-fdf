@@ -1,4 +1,4 @@
-NAME 			=	./a.out
+NAME 			=	./fdf
 
 CC				=	gcc
 
@@ -72,13 +72,13 @@ fclean:				clean
 re:					fclean all
 
 retest:				re
-					./a.out
+					./fdf
 
 test:				all
-					./a.out test_maps/t1.fdf
+					./fdf test_maps/t1.fdf
 
 valgrind:			re
-					valgrind --leak-check=full --show-leak-kinds=all -s ./a.out test_maps/42.fdf
+					valgrind --leak-check=full --show-leak-kinds=all -s ./fdf test_maps/42.fdf
 
 -include $(DEPS)
 
