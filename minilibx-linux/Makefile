@@ -14,9 +14,10 @@
 all	: do_configure
 
 do_configure	:
-	./configure
+	./configure 2>/dev/null
 
 clean	:
-	./configure clean
+	./configure 2>/dev/null clean
 
 re	: clean all
+.SILENT:
