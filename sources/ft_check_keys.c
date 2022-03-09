@@ -6,7 +6,11 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 08:11:34 by aweaver           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/03/08 09:32:51 by aweaver          ###   ########.fr       */
+=======
+/*   Updated: 2022/03/02 10:38:49 by aweaver          ###   ########.fr       */
+>>>>>>> d87b4cc571e9795d089779e7d81b33522b087848
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +24,24 @@ void	ft_check_rotate(int keycode, t_fdf_env *env)
 		env->var->o = 0.5236;
 		env->var->angle += 0.2618;
 		if (env->var->angle >= 6)
+<<<<<<< HEAD
 			env->var->angle = 0;
+=======
+			env->var->angle = 0.5236;
+>>>>>>> d87b4cc571e9795d089779e7d81b33522b087848
 		ft_redraw(env);
 	}
 	if (keycode == KEY_D)
 	{
 		env->var->o = 0.5236;
 		env->var->angle -= 0.2618;
+<<<<<<< HEAD
 		if (env->var->angle < 0)
 			env->var->angle = 5.7596;
+=======
+		if (env->var->angle <= 0.5)
+			env->var->angle = 6.2832;
+>>>>>>> d87b4cc571e9795d089779e7d81b33522b087848
 		ft_redraw(env);
 	}
 	if (keycode == KEY_SPACE)

@@ -64,4 +64,7 @@ clean	:
 	rm -rf $(OBJ_DIR)/ $(NAME) $(NAME_UNAME) *~ core *.core
 
 .PHONY: all check show clean
+<<<<<<< HEAD
 .SILENT:
+=======
+>>>>>>> d87b4cc571e9795d089779e7d81b33522b087848
