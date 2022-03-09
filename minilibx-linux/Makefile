@@ -14,7 +14,6 @@
 all	: do_configure
 
 do_configure	:
-<<<<<<< HEAD
 	./configure 2>/dev/null
 
 clean	:
@@ -22,11 +21,3 @@ clean	:
 
 re	: clean all
 .SILENT:
-=======
-	./configure
-
-clean	:
-	./configure clean
-
-re	: clean all
->>>>>>> d87b4cc571e9795d089779e7d81b33522b087848

@@ -6,11 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/21 10:51:23 by aweaver           #+#    #+#             */
-<<<<<<< HEAD
 /*   Updated: 2022/03/08 10:20:47 by aweaver          ###   ########.fr       */
-=======
-/*   Updated: 2022/03/02 13:12:50 by aweaver          ###   ########.fr       */
->>>>>>> d87b4cc571e9795d089779e7d81b33522b087848
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +42,6 @@ void	ft_free_str(t_fdf_str *gnl)
 	}
 }
 
-<<<<<<< HEAD
 void	ft_nuke_wrong_fd(t_fdf_env *env)
 {
 	if (env->img)
@@ -63,8 +58,6 @@ void	ft_nuke_wrong_fd(t_fdf_env *env)
 	exit (-1);
 }
 
-=======
->>>>>>> d87b4cc571e9795d089779e7d81b33522b087848
 void	ft_nuke_empty(t_fdf_env *env)
 {
 	free(env->map);

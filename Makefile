@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 NAME 			=	./fdf
-=======
-NAME 			=	./a.out
->>>>>>> d87b4cc571e9795d089779e7d81b33522b087848
 
 CC				=	gcc
 
@@ -76,7 +72,6 @@ fclean:				clean
 re:					fclean all
 
 retest:				re
-<<<<<<< HEAD
 					./fdf
 
 test:				all
@@ -84,15 +79,6 @@ test:				all
 
 valgrind:			re
 					valgrind --leak-check=full --show-leak-kinds=all -s ./fdf test_maps/42.fdf
-=======
-					./a.out
-
-test:				all
-					./a.out test_maps/42powa.fdf
-
-valgrind:			re
-					valgrind --leak-check=full --show-leak-kinds=all -s ./a.out test_maps/42.fdf
->>>>>>> d87b4cc571e9795d089779e7d81b33522b087848
 
 -include $(DEPS)
 

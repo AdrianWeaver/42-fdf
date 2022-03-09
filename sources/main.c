@@ -6,11 +6,7 @@
 /*   By: aweaver <aweaver@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 07:16:23 by aweaver           #+#    #+#             */
-<<<<<<< HEAD
 /*   Updated: 2022/03/08 09:24:15 by aweaver          ###   ########.fr       */
-=======
-/*   Updated: 2022/03/07 10:01:20 by aweaver          ###   ########.fr       */
->>>>>>> d87b4cc571e9795d089779e7d81b33522b087848
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +38,8 @@ void	ft_init_img(t_fdf_env *env, t_fdf_img *img)
 
 void	t_fdf_init_env(t_fdf_env *env)
 {
-<<<<<<< HEAD
 	env->window_w = 2200;
 	env->window_h = 1280;
-=======
-	env->window_w = 1200;
-	env->window_h = 1200;
->>>>>>> d87b4cc571e9795d089779e7d81b33522b087848
 	env->mlx_id = mlx_init();
 	if (env->mlx_id == 0)
 	{
